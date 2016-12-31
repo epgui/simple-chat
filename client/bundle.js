@@ -34078,7 +34078,32 @@
 	  _createClass(ViewLoginScreen, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('div', { id: 'loginScreen' });
+	      var submitUsername = function submitUsername() {};
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'loginScreen' },
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'ChatMaster 2000'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'Please enter your name.'
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: submitUsername },
+	          _react2.default.createElement('input', { ref: null }),
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'submit' },
+	            'Login'
+	          )
+	        )
+	      );
 	    }
 	  }]);
 	
