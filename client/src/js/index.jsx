@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { store } from './Store.js';
 import ContainerApplication from './ContainerApplication.jsx';
 
-
 render(
   <Provider store={store}>
     <ContainerApplication />

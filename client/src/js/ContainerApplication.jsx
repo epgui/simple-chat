@@ -31,8 +31,8 @@ const mapDispatchToProps = function(dispatch) {
     receive: (message) => {
       dispatch(receiveMessage(message));
     },
-    confirm: () => {
-      dispatch(confirmReception());
+    confirm: (id) => {
+      dispatch(confirmReception(id));
     }
   }
 }
