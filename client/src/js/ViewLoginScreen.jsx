@@ -1,5 +1,6 @@
-import React      from 'react';
-import { render } from 'react-dom';
+import React             from 'react';
+import { render }        from 'react-dom';
+import FormInputUsername from './FormInputUsername.jsx';
 
 class ViewLoginScreen extends React.Component
 {
@@ -13,10 +14,9 @@ class ViewLoginScreen extends React.Component
       <div id="loginScreen">
         <h1>ChatMaster 2000</h1>
         <p>Please enter your name.</p>
-        <form onSubmit={submitUsername}>
-          <input ref={null} />
-          <button type="submit">Login</button>
-        </form>
+        <FormInputUsername
+          onLogin={this.props.onLogin}
+        />
       </div>
     );
   }
