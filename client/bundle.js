@@ -33378,10 +33378,10 @@
 	// Import state machine components
 	var initialState = exports.initialState = {
 	  error: false,
-	  view: _StateMachineDefinitions.VIEW_STATE.LOGIN_SCREEN,
+	  view: _StateMachineDefinitions.VIEW_STATE.SPEAK_SCREEN,
 	  user: {
 	    username: "John Doe",
-	    authenticated: false,
+	    authenticated: true,
 	    lastActive: now
 	  },
 	  messages: []
