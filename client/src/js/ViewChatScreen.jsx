@@ -8,17 +8,34 @@ class ViewChatScreen extends React.Component
 
   componentDidMount()
   {
-    // var this.connection = new WebSocket("ws://www.example.com/socketserver");
-    // this.connection.onmessage = this.receiveMessage;
-    // this.connection.onerror = this.catchConnectionError;
-    // this.connection.onclose = this.closeConnection;
+    this.connection = new WebSocket("ws://localhost:4567/chat");
+    this.connection.onmessage = this.receiveMessage.bind(this);
+    this.connection.onerror = this.catchConnectionError;
+    this.connection.onclose = this.closeConnection;
   }
 
-  receiveMessage(message)
+  receiveMessage(websocketCommunication)
   {
+
+    var data = JSON.parse(websocketCommunication.data);
+
+    var message = {
+      "id":        data.message.id,
+      "author":    data.message.author,
+      "contents":  data.message.contents,
+      "timestamp": data.message.timestamp
+    };
+
+    // var userList = []
+    // for (var i = 0, len = websocketCommunication.data.sessionUserMap.length; i < len; i++)
+    // {
+    //   var userFromList = websocketCommunication.data.sessionUserMap[i];
+    //   userList.push(userFromList.username);
+    // }
+
     // if message is an actual user message
-    // console.log("Message received: " + JSON.stringify(message));
-    // this.props.onMessageReceive(message);
+    console.log(message);
+    this.props.onMessageReceive(message);
 
     // otherwise if message is a read receipt
     // console.log("Roger that!");
@@ -31,7 +48,20 @@ class ViewChatScreen extends React.Component
   {
     if (message !== "")
     {
-      this.connection.send(message);
+      // Get UNIX timestamp
+      var timestamp = Math.round(new Date().getTime() / 1000);
+
+      // Build a standard json message
+      var json = {
+        "id": 1,
+        "contents": message,
+        "author": this.props.user.username,
+        "timestamp": timestamp
+      }
+
+      this.connection.send(JSON.stringify(json));
+      this.props.onMessageSend(json);
+      console.log(json);
     }
   }
 
@@ -52,12 +82,14 @@ class ViewChatScreen extends React.Component
         <div id="mainPanel">
           <ViewConversation
             key={1}
+            user={this.props.user}
+            messages={this.props.messages}
             onMessageConfirm={this.props.onMessageConfirm}
             onMessageReceive={this.props.onMessageReceive}
           />
           <FormInputSendMessage
             key={2}
-            onMessageSend={this.props.onMessageSend}
+            sendMessage={this.sendMessage.bind(this)}
           />
         </div>
         <div id="userList">

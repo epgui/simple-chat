@@ -33760,17 +33760,34 @@
 	  _createClass(ViewChatScreen, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      // var this.connection = new WebSocket("ws://www.example.com/socketserver");
-	      // this.connection.onmessage = this.receiveMessage;
-	      // this.connection.onerror = this.catchConnectionError;
-	      // this.connection.onclose = this.closeConnection;
+	      this.connection = new WebSocket("ws://localhost:4567/chat");
+	      this.connection.onmessage = this.receiveMessage.bind(this);
+	      this.connection.onerror = this.catchConnectionError;
+	      this.connection.onclose = this.closeConnection;
 	    }
 	  }, {
 	    key: 'receiveMessage',
-	    value: function receiveMessage(message) {
+	    value: function receiveMessage(websocketCommunication) {
+	
+	      var data = JSON.parse(websocketCommunication.data);
+	
+	      var message = {
+	        "id": data.message.id,
+	        "author": data.message.author,
+	        "contents": data.message.contents,
+	        "timestamp": data.message.timestamp
+	      };
+	
+	      // var userList = []
+	      // for (var i = 0, len = websocketCommunication.data.sessionUserMap.length; i < len; i++)
+	      // {
+	      //   var userFromList = websocketCommunication.data.sessionUserMap[i];
+	      //   userList.push(userFromList.username);
+	      // }
+	
 	      // if message is an actual user message
-	      // console.log("Message received: " + JSON.stringify(message));
-	      // this.props.onMessageReceive(message);
+	      console.log(message);
+	      this.props.onMessageReceive(message);
 	
 	      // otherwise if message is a read receipt
 	      // console.log("Roger that!");
@@ -33782,7 +33799,20 @@
 	    key: 'sendMessage',
 	    value: function sendMessage(message) {
 	      if (message !== "") {
-	        this.connection.send(message);
+	        // Get UNIX timestamp
+	        var timestamp = Math.round(new Date().getTime() / 1000);
+	
+	        // Build a standard json message
+	        var json = {
+	          "id": 1,
+	          "contents": message,
+	          "author": this.props.user.username,
+	          "timestamp": timestamp
+	        };
+	
+	        this.connection.send(JSON.stringify(json));
+	        this.props.onMessageSend(json);
+	        console.log(json);
 	      }
 	    }
 	  }, {
@@ -33806,12 +33836,14 @@
 	          { id: 'mainPanel' },
 	          _react2.default.createElement(_ViewConversation2.default, {
 	            key: 1,
+	            user: this.props.user,
+	            messages: this.props.messages,
 	            onMessageConfirm: this.props.onMessageConfirm,
 	            onMessageReceive: this.props.onMessageReceive
 	          }),
 	          _react2.default.createElement(_FormInputSendMessage2.default, {
 	            key: 2,
-	            onMessageSend: this.props.onMessageSend
+	            sendMessage: this.sendMessage.bind(this)
 	          })
 	        ),
 	        _react2.default.createElement(
@@ -33873,7 +33905,33 @@
 	  _createClass(ViewConversation, [{
 	    key: 'render',
 	    value: function render() {
-	      var messages = [];
+	      var user = this.props.user;
+	      var messagesInState = this.props.messages;
+	      var messagesToRender = [];
+	
+	      for (var i = 0, len = messagesInState.length; i < len; i++) {
+	        var message = messagesInState[i];
+	
+	        messagesToRender.push(_react2.default.createElement(
+	          'div',
+	          { key: i, className: 'message', id: "messageID-" + message.id },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'messageAuthor' },
+	            message.author
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'messageContents' },
+	            message.contents
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'messageTimestamp' },
+	            message.timestamp
+	          )
+	        ));
+	      }
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -33883,7 +33941,11 @@
 	          null,
 	          'Conversation'
 	        ),
-	        messages
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'conversationMessages' },
+	          messagesToRender
+	        )
 	      );
 	    }
 	  }]);
@@ -34121,7 +34183,7 @@
 	    key: 'handleSubmit',
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
-	      // TODO: Submit!
+	      this.props.sendMessage(this.state.value);
 	    }
 	  }, {
 	    key: 'handleKeyPress',

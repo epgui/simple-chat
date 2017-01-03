@@ -20,7 +20,7 @@ public class Chat {
 
    public static void main(String[] args) {
 
-      staticFileLocation("/public"); //index.html is served at localhost:4567 (default port)
+      // staticFileLocation("/public"); //index.html is served at localhost:4567 (default port)
       webSocket("/chat", ChatWebSocketHandler.class);
       init();
 
@@ -28,6 +28,9 @@ public class Chat {
 
    //Sends a message from one user to all users, along with a list of current usernames
    public static void broadcastMessage(User sender, String jsonMessage) {
+
+      System.out.println("Preparing to broadcast the following json message:\n");
+      System.out.println(jsonMessage + "\n");
 
       // Interpret received message
       Message message = createMessageFromJSON(jsonMessage);
@@ -38,7 +41,13 @@ public class Chat {
       communication.setMessage(message);
       communication.setSessionUserMap(sessionUserMap);
 
+      System.out.println("Preparing to broadcast the following communication:\n");
+      System.out.println(convertObjectToJSON(communication) + "\n");
+
       sessionUserMap.keySet().stream().filter(Session::isOpen).forEach(session -> {
+
+         System.out.println("This is the list of recipients:\n");
+         System.out.println(session.toString() + "\n");
 
          try {
 

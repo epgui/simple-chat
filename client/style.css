@@ -9,6 +9,7 @@ html { background: #EFEFEF url(assets/symphony.png); font-family: 'HelveticaNeue
 #chatScreen #userList #users { bottom: 0; left: 0; position: absolute; right: 0; top: 0; }
 #chatScreen #mainPanel { bottom: 0; left: 0; position: absolute; right: 200px; top: 0; }
 #chatScreen #mainPanel #conversation { background: #FFF; border: 1px solid #E2E2E2; border-radius: 5px; bottom: 120px; left: 10px; position: absolute; right: 10px; top: 10px; }
+#chatScreen #mainPanel #conversation #conversationMessages { bottom: 0; left: 10px; position: absolute; right: 10px; top: 40px; }
 #chatScreen #mainPanel #messageForm { background: #FFF; border: 1px solid #E2E2E2; border-radius: 5px; bottom: 10px; height: 100px; left: 10px; position: absolute; right: 10px; }
 #chatScreen #mainPanel #messageForm #messageBox { bottom: 0; left: 0; position: absolute; right: 130px; top: 0; }
 #chatScreen #mainPanel #messageForm #messageBox textarea { background: none; border: 0; color: #888; font-family: Georgia; font-size: 16px; font-style: italic; height: 80px; margin: 0; padding: 10px; resize: none; width: 100%; }

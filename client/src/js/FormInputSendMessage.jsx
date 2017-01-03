@@ -28,7 +28,7 @@ class FormInputSendMessage extends React.Component
   handleSubmit(event)
   {
     event.preventDefault();
-    // TODO: Submit!
+    this.props.sendMessage(this.state.value);
   }
 
   handleKeyPress(event)

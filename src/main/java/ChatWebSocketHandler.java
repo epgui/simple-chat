@@ -16,23 +16,25 @@ public class ChatWebSocketHandler {
       // Create a temporary username
       String temporaryUsername = "User " + id;
 
-      // Get a UNIX timestamp
-      Date now = new Date();
-      int timestamp = toIntExact(now.getTime() / 1000);
-
       // Create user object
       User user = new User();
       user.setId(id);
       user.setUsername(temporaryUsername);
-      user.setLastActive(timestamp);
 
       // Add user to the conversation
       Chat.sessionUserMap.put(userSession, user);
 
-      // Broadcast
-      User sender = Chat.server;
-      String msg = user.getUsername() + " joined the chat";
-      Chat.broadcastMessage(sender, msg);
+      // Build a server message
+      Message message = new Message();
+      message.setId(1);
+      message.setAuthor(Chat.server.getUsername());
+      message.setContents(user.getUsername() + " joined the chat");
+      String jsonMessage = Chat.convertObjectToJSON(message);
+
+      System.out.println("onConnect built the following json message:\n");
+      System.out.println(jsonMessage + "\n");
+
+      Chat.broadcastMessage(Chat.server, jsonMessage);
 
    }
 
@@ -42,9 +44,17 @@ public class ChatWebSocketHandler {
       User user = Chat.sessionUserMap.get(userSession);
       Chat.sessionUserMap.remove(userSession);
 
-      User sender = Chat.server;
-      String msg = user.getUsername() + " left the chat";
-      Chat.broadcastMessage(sender, msg);
+      // Build a server message
+      Message message = new Message();
+      message.setId(1);
+      message.setAuthor(Chat.server.getUsername());
+      message.setContents(user.getUsername() + " left the chat");
+      String jsonMessage = Chat.convertObjectToJSON(message);
+
+      System.out.println("onClose built the following json message:\n");
+      System.out.println(jsonMessage);
+
+      Chat.broadcastMessage(Chat.server, jsonMessage);
 
    }
 
@@ -52,6 +62,13 @@ public class ChatWebSocketHandler {
    public void onMessage(Session user, String jsonMessage) {
 
       // TODO: Add support for custom usernames
+
+      // Just doing this so I can get prettified JSON in my console. Might eventually want to validate jsonMessage here.
+      Message message = Chat.createMessageFromJSON(jsonMessage);
+      String prettyJSON = Chat.convertObjectToJSON(message);
+
+      System.out.println("onMessage received the following json message:\n");
+      System.out.println(prettyJSON + "\n");
 
       User sender = Chat.sessionUserMap.get(user);
       Chat.broadcastMessage(sender, jsonMessage);
