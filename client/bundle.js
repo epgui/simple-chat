@@ -33380,8 +33380,8 @@
 	  error: false,
 	  view: _StateMachineDefinitions.VIEW_STATE.SPEAK_SCREEN,
 	  user: {
+	    id: null,
 	    username: "John Doe",
-	    authenticated: true,
 	    lastActive: now
 	  },
 	  userList: [],
@@ -33435,8 +33435,6 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    case _StateMachineDefinitions.AUTHENTICATE:
-	      return _StateMachineDefinitions.VIEW_STATE.SPEAK_SCREEN;
 	    default:
 	      return state;
 	  }
@@ -33447,15 +33445,18 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    case _StateMachineDefinitions.AUTHENTICATE:
+	    case _StateMachineDefinitions.ASSIGN_USER_ID:
 	      return _extends({}, state, {
-	        username: action.username,
-	        authenticated: true,
-	        lastActive: action.timestamp
+	        id: action.id
+	      });
+	    case _StateMachineDefinitions.UPDATE_USERNAME:
+	      return _extends({}, state, {
+	        username: action.user.username,
+	        lastActive: action.user.lastActive
 	      });
 	    case _StateMachineDefinitions.SEND_MESSAGE:
 	      return _extends({}, state, {
-	        lastActive: action.timestamp
+	        lastActive: action.message.lastActive
 	      });
 	    default:
 	      return state;
@@ -33474,6 +33475,10 @@
 	        lastActive: action.user.lastActive,
 	        connected: true
 	      }]);
+	    case _StateMachineDefinitions.UPDATE_USERNAME:
+	      return state.map(function (u) {
+	        return modifyUserList(u, action);
+	      });
 	    case _StateMachineDefinitions.DISCONNECT_USER:
 	      return state.map(function (u) {
 	        return modifyUserList(u, action);
@@ -33487,17 +33492,18 @@
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	  var action = arguments[1];
 	
-	  if (state.id !== action.id) {
+	  if (state.id !== action.user.id) {
 	    return state;
 	  } else {
+	    var now = new Date();
 	    switch (action.type) {
 	      case _StateMachineDefinitions.DISCONNECT_USER:
 	        return _extends({}, state, {
 	          connected: false
 	        });
-	      case UPDATE_LAST_ACTIVE:
-	        var now = new Date();
+	      case _StateMachineDefinitions.UPDATE_USERNAME:
 	        return _extends({}, state, {
+	          username: action.user.username,
 	          lastActive: now
 	        });
 	      default:
@@ -33561,11 +33567,12 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.authenticate = authenticate;
+	exports.assignUserID = assignUserID;
 	exports.receiveMessage = receiveMessage;
 	exports.sendMessage = sendMessage;
 	exports.confirmReception = confirmReception;
 	exports.addUserToList = addUserToList;
+	exports.updateUsername = updateUsername;
 	exports.disconnectUserID = disconnectUserID;
 	// Define all possible view states
 	var VIEW_STATE = exports.VIEW_STATE = {
@@ -33574,17 +33581,18 @@
 	};
 	
 	// Define all possible action types
-	var AUTHENTICATE = exports.AUTHENTICATE = "authenticate";
+	var ASSIGN_USER_ID = exports.ASSIGN_USER_ID = "assign-user-id";
 	var RECEIVE_MESSAGE = exports.RECEIVE_MESSAGE = "receive-message";
 	var SEND_MESSAGE = exports.SEND_MESSAGE = "send-message";
 	var CONFIRM_RECEPTION = exports.CONFIRM_RECEPTION = "confirm-reception";
 	var ADD_USER_TO_LIST = exports.ADD_USER_TO_LIST = "add-user-to-list";
 	var DISCONNECT_USER = exports.DISCONNECT_USER = "disconnect-user";
+	var UPDATE_USERNAME = exports.UPDATE_USERNAME = "update-username";
 	
-	// Define action creators
-	function authenticate(user) {
+	// Define action
+	function assignUserID(user) {
 	  return {
-	    type: AUTHENTICATE,
+	    type: ASSIGN_USER_ID,
 	    user: user
 	  };
 	}
@@ -33613,6 +33621,13 @@
 	function addUserToList(user) {
 	  return {
 	    type: ADD_USER_TO_LIST,
+	    user: user
+	  };
+	}
+	
+	function updateUsername(user) {
+	  return {
+	    type: UPDATE_USERNAME,
 	    user: user
 	  };
 	}
@@ -33671,8 +33686,8 @@
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
-	    login: function login(user) {
-	      dispatch((0, _StateMachineDefinitions.authenticate)(user));
+	    assignID: function assignID(user) {
+	      dispatch((0, _StateMachineDefinitions.assignUserID)(user));
 	    },
 	    send: function send(message) {
 	      dispatch((0, _StateMachineDefinitions.sendMessage)(message));
@@ -33685,6 +33700,9 @@
 	    },
 	    addUser: function addUser(user) {
 	      dispatch((0, _StateMachineDefinitions.addUserToList)(user));
+	    },
+	    onUsernameChange: function onUsernameChange(user) {
+	      dispatch((0, _StateMachineDefinitions.updateUsername)(user));
 	    },
 	    disconnectUser: function disconnectUser(id) {
 	      dispatch(disconnectUserID(id));
@@ -33761,7 +33779,8 @@
 	            onMessageReceive: this.props.receive,
 	            onMessageConfirm: this.props.confirm,
 	            onUserConnect: this.props.addUser,
-	            onUserDisconnect: this.props.disconnectUser
+	            onUserDisconnect: this.props.disconnectUser,
+	            onUsernameChange: this.props.onUsernameChange
 	          }));
 	          break;
 	        default:
@@ -33854,8 +33873,6 @@
 	        "timestamp": data.message.timestamp
 	      };
 	
-	      var userList = data.userList;
-	      console.log(userList);
 	      this.updateUserList(data.userList);
 	
 	      // if message is an actual user message
@@ -33869,15 +33886,18 @@
 	    }
 	  }, {
 	    key: 'updateUserList',
-	    value: function updateUserList(userList) // Probably very inefficient
+	    value: function updateUserList(userList) // Probably very inefficient, this was hacked together in 2 minutes
 	    {
 	      var unmatchedUsers = [];
 	
-	      for (var i = 0, len = userList.length; i < len; i++) {
+	      for (var i = 0, iLength = userList.length; i < iLength; i++) {
 	        var matched = false;
 	
-	        for (var j = 0, len = this.props.userList.length; j < len; j++) {
-	          if (userList[i].username == this.props.userList[j].username) {
+	        for (var j = 0, jLength = this.props.userList.length; j < jLength; j++) {
+	          if (userList[i].id == this.props.userList[j].id) {
+	            if (userList[i].username != this.props.userList[j].username) {
+	              this.props.onUsernameChange(userList[i]);
+	            }
 	            matched = true;
 	          }
 	        }
@@ -33889,7 +33909,27 @@
 	
 	      if (unmatchedUsers.length > 0) {
 	        this.props.onUserConnect(unmatchedUsers[0]);
-	      }
+	      } else // See if we need to disconnect any users
+	        {
+	          for (var i = 0, iLength = this.props.userList.length; i < iLength; i++) {
+	            var matched = false;
+	
+	            for (var j = 0, jLength = userList.length; j < jLength; j++) {
+	              if (this.props.userList[i].id == userList[j].id) {
+	                matched = true;
+	              }
+	            }
+	
+	            if (matched == false) {
+	              unmatchedUsers.push(this.props.userList[i]);
+	            }
+	          }
+	
+	          if (unmatchedUsers.length > 0) {
+	            // TODO: TEST THIS!!!
+	            this.props.onUserDisconnect(unmatchedUsers[0].id);
+	          }
+	        }
 	    }
 	  }, {
 	    key: 'sendMessage',
@@ -33907,6 +33947,8 @@
 	        };
 	
 	        this.connection.send(JSON.stringify(json));
+	
+	        // Do not do this until read receipts are implemented
 	        // this.props.onMessageSend(json);
 	      }
 	    }
@@ -34009,10 +34051,12 @@
 	      var user = this.props.user;
 	      var messagesInState = this.props.messages;
 	      var messagesToRender = [];
+	      var lastMessageAuthor = null;
 	
 	      for (var i = 0, len = messagesInState.length; i < len; i++) {
 	        var message = messagesInState[i];
 	        var messageClass = "message";
+	        var messageAuthorClass = "messageAuthor";
 	
 	        if (message.author == "Server") {
 	          messageClass += " server";
@@ -34020,12 +34064,19 @@
 	          messageClass += " self";
 	        }
 	
+	        if (message.author == lastMessageAuthor) {
+	          messageAuthorClass += " hidden";
+	          messageClass += " running";
+	        }
+	
+	        lastMessageAuthor = message.author;
+	
 	        messagesToRender.push(_react2.default.createElement(
 	          'div',
 	          { key: i, className: messageClass, id: "messageID-" + message.id },
 	          _react2.default.createElement(
 	            'span',
-	            { className: 'messageAuthor' },
+	            { className: messageAuthorClass },
 	            message.author
 	          ),
 	          _react2.default.createElement(

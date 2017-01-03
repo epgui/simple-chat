@@ -8,6 +8,7 @@ public class Message {
    private int timestamp;
 
    public Message() {
+      setId();
       setTimestamp();
    }
 
@@ -15,8 +16,9 @@ public class Message {
       return id;
    }
 
-   public void setId(int id) {
-      this.id = id;
+   public void setId() {
+      // Create a message ID number
+      this.id = Chat.nextMessageNumber++;
    }
 
    public String getContents() {

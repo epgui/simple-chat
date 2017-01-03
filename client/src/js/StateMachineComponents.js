@@ -1,11 +1,12 @@
 // Import state machine actions
 import {
-  AUTHENTICATE,
+  ASSIGN_USER_ID,
   RECEIVE_MESSAGE,
   SEND_MESSAGE,
   CONFIRM_RECEPTION,
   ADD_USER_TO_LIST,
-  DISCONNECT_USER
+  DISCONNECT_USER,
+  UPDATE_USERNAME
 } from './StateMachineDefinitions.js';
 
 // Import state definitions
@@ -15,8 +16,6 @@ export function ViewStateMachine(state = VIEW_STATE.LOGIN_SCREEN, action)
 {
   switch (action.type)
   {
-    case AUTHENTICATE:
-      return VIEW_STATE.SPEAK_SCREEN;
     default:
       return state;
   }
@@ -26,17 +25,21 @@ export function UserStateMachine(state = {}, action)
 {
   switch (action.type)
   {
-    case AUTHENTICATE:
+    case ASSIGN_USER_ID:
       return {
         ...state,
-        username: action.username,
-        authenticated: true,
-        lastActive: action.timestamp
+        id: action.id
+      };
+    case UPDATE_USERNAME:
+      return {
+        ...state,
+        username: action.user.username,
+        lastActive: action.user.lastActive
       };
     case SEND_MESSAGE:
       return {
         ...state,
-        lastActive: action.timestamp
+        lastActive: action.message.lastActive
       };
     default:
       return state;
@@ -57,6 +60,8 @@ export function UserListStateMachine(state = [], action)
           connected:  true
         }
       ];
+    case UPDATE_USERNAME:
+      return state.map(u => modifyUserList(u, action));
     case DISCONNECT_USER:
       return state.map(u => modifyUserList(u, action));
     default:
@@ -66,12 +71,13 @@ export function UserListStateMachine(state = [], action)
 
 function modifyUserList(state = {}, action)
 {
-  if (state.id !== action.id)
+  if (state.id !== action.user.id)
   {
     return state
   }
   else
   {
+    var now = new Date();
     switch (action.type)
     {
       case DISCONNECT_USER:
@@ -79,12 +85,12 @@ function modifyUserList(state = {}, action)
           ...state,
           connected: false
         };
-      case UPDATE_LAST_ACTIVE:
-        var now = new Date();
+      case UPDATE_USERNAME:
         return {
           ...state,
+          username: action.user.username,
           lastActive: now
-        };
+        }
       default:
         return state;
     }

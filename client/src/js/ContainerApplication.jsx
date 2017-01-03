@@ -2,7 +2,14 @@ import React           from 'react';
 import { render }      from 'react-dom';
 import { connect }     from 'react-redux';
 import ViewApplication from './ViewApplication.jsx';
-import { authenticate, receiveMessage, sendMessage, confirmReception, addUserToList } from './StateMachineDefinitions.js';
+import {
+  assignUserID,
+  receiveMessage,
+  sendMessage,
+  confirmReception,
+  addUserToList,
+  updateUsername
+} from './StateMachineDefinitions.js';
 
 // This generates ContainerApplication, which passes the store's state onto Application, its child component.
 
@@ -23,8 +30,8 @@ const mapStateToProps = function(state)
 
 const mapDispatchToProps = function(dispatch) {
   return {
-    login: (user) => {
-      dispatch(authenticate(user));
+    assignID: (user) => {
+      dispatch(assignUserID(user));
     },
     send: (message) => {
       dispatch(sendMessage(message));
@@ -37,6 +44,9 @@ const mapDispatchToProps = function(dispatch) {
     },
     addUser: (user) => {
       dispatch(addUserToList(user));
+    },
+    onUsernameChange: (user) => {
+      dispatch(updateUsername(user));
     },
     disconnectUser: (id) => {
       dispatch(disconnectUserID(id));

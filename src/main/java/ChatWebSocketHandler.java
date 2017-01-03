@@ -10,25 +10,25 @@ public class ChatWebSocketHandler {
    public void onConnect(Session userSession) throws Exception {
 
       // Create a user ID number
-      int id = Chat.nextUserNumber++;
+      int userID = Chat.nextUserNumber++;
 
       // TODO: Add support for custom usernames
       // Create a temporary username
-      String temporaryUsername = "User " + id;
+      String temporaryUsername = "User " + userID;
 
       // Create user object
       User user = new User();
-      user.setId(id);
+      user.setId(userID);
       user.setUsername(temporaryUsername);
 
       // Add user to the conversation
       Chat.sessionUserMap.put(userSession, user);
+      Chat.idUserMap.put(userID, user);
 
       // Build a server message
       Message message = new Message();
-      message.setId(1);
       message.setAuthor(Chat.server.getUsername());
-      message.setContents(user.getUsername() + " joined the chat");
+      message.setContents(user.getUsername() + " joined the chat.");
       String jsonMessage = Chat.convertObjectToJSON(message);
 
       System.out.println("onConnect built the following json message:\n");
@@ -46,9 +46,8 @@ public class ChatWebSocketHandler {
 
       // Build a server message
       Message message = new Message();
-      message.setId(1);
       message.setAuthor(Chat.server.getUsername());
-      message.setContents(user.getUsername() + " left the chat");
+      message.setContents(user.getUsername() + " left the chat.");
       String jsonMessage = Chat.convertObjectToJSON(message);
 
       System.out.println("onClose built the following json message:\n");
@@ -61,16 +60,26 @@ public class ChatWebSocketHandler {
    @OnWebSocketMessage
    public void onMessage(Session user, String jsonMessage) {
 
-      // TODO: Add support for custom usernames
-
       // Just doing this so I can get prettified JSON in my console. Might eventually want to validate jsonMessage here.
       Message message = Chat.createMessageFromJSON(jsonMessage);
       String prettyJSON = Chat.convertObjectToJSON(message);
-
       System.out.println("onMessage received the following json message:\n");
       System.out.println(prettyJSON + "\n");
 
       User sender = Chat.sessionUserMap.get(user);
+
+      if ( ! Objects.equals(sender.getUsername(), message.getAuthor()) )
+      {
+         // Build a server message to notify everyone of the username change
+         Message deltaMessage = new Message();
+         deltaMessage.setAuthor(Chat.server.getUsername());
+         deltaMessage.setContents(sender.getUsername() + " is now called " + message.getAuthor() + ".");
+         String jsonDeltaMessage = Chat.convertObjectToJSON(deltaMessage);
+         Chat.broadcastMessage(Chat.server, jsonDeltaMessage);
+
+         sender.setUsername(message.getAuthor());
+      }
+
       Chat.broadcastMessage(sender, jsonMessage);
 
    }

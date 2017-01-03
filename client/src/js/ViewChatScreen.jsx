@@ -26,8 +26,6 @@ class ViewChatScreen extends React.Component
       "timestamp": data.message.timestamp
     };
 
-    var userList = data.userList;
-    console.log(userList);
     this.updateUserList(data.userList);
 
     // if message is an actual user message
@@ -40,18 +38,22 @@ class ViewChatScreen extends React.Component
     // console.log("There was a change to the user list!");
   }
 
-  updateUserList(userList) // Probably very inefficient
+  updateUserList(userList) // Probably very inefficient, this was hacked together in 2 minutes
   {
     var unmatchedUsers = [];
 
-    for (var i = 0, len = userList.length; i < len; i++)
+    for (var i = 0, iLength = userList.length; i < iLength; i++)
     {
       var matched = false;
 
-      for (var j = 0, len = this.props.userList.length; j < len; j++)
+      for (var j = 0, jLength = this.props.userList.length; j < jLength; j++)
       {
-        if (userList[i].username == this.props.userList[j].username)
+        if (userList[i].id == this.props.userList[j].id)
         {
+          if (userList[i].username != this.props.userList[j].username)
+          {
+            this.props.onUsernameChange(userList[i]);
+          }
           matched = true;
         }
       }
@@ -66,6 +68,33 @@ class ViewChatScreen extends React.Component
     {
       this.props.onUserConnect(unmatchedUsers[0]);
     }
+    else // See if we need to disconnect any users
+    {
+      for (var i = 0, iLength = this.props.userList.length; i < iLength; i++)
+      {
+        var matched = false;
+
+        for (var j = 0, jLength = userList.length; j < jLength; j++)
+        {
+          if (this.props.userList[i].id == userList[j].id)
+          {
+            matched = true;
+          }
+        }
+
+        if (matched == false)
+        {
+          unmatchedUsers.push(this.props.userList[i]);
+        }
+      }
+
+      if (unmatchedUsers.length > 0)
+      {
+        // TODO: TEST THIS!!!
+        this.props.onUserDisconnect(unmatchedUsers[0].id);
+      }
+    }
+
   }
 
   sendMessage(message)
@@ -84,6 +113,8 @@ class ViewChatScreen extends React.Component
       }
 
       this.connection.send(JSON.stringify(json));
+
+      // Do not do this until read receipts are implemented
       // this.props.onMessageSend(json);
     }
   }

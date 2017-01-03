@@ -2,17 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14c72f65-9bb1-4a4e-bda5-4125c5f27102" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/Chat.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/WebSocketJSON.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Chat.class" afterPath="$PROJECT_DIR$/target/classes/Chat.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/ChatWebSocketHandler.class" afterPath="$PROJECT_DIR$/target/classes/ChatWebSocketHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Message.class" afterPath="$PROJECT_DIR$/target/classes/Message.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/bundle.js" afterPath="$PROJECT_DIR$/client/bundle.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/bundle.js.map" afterPath="$PROJECT_DIR$/client/bundle.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/ContainerApplication.jsx" afterPath="$PROJECT_DIR$/client/src/js/ContainerApplication.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/StateMachine.js" afterPath="$PROJECT_DIR$/client/src/js/StateMachine.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/StateMachineComponents.js" afterPath="$PROJECT_DIR$/client/src/js/StateMachineComponents.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/StateMachineDefinitions.js" afterPath="$PROJECT_DIR$/client/src/js/StateMachineDefinitions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/ViewApplication.jsx" afterPath="$PROJECT_DIR$/client/src/js/ViewApplication.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/ViewChatScreen.jsx" afterPath="$PROJECT_DIR$/client/src/js/ViewChatScreen.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/style.css" afterPath="$PROJECT_DIR$/client/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Chat.java" afterPath="$PROJECT_DIR$/src/main/java/Chat.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/WebSocketJSON.java" afterPath="$PROJECT_DIR$/src/main/java/WebSocketJSON.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ChatWebSocketHandler.java" afterPath="$PROJECT_DIR$/src/main/java/ChatWebSocketHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Message.java" afterPath="$PROJECT_DIR$/src/main/java/Message.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -42,29 +47,52 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="WebSocketJSON.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/WebSocketJSON.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="666">
+              <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#243#249#0" expanded="true" />
+                <element signature="e#281#282#0" expanded="true" />
+                <element signature="e#307#308#0" expanded="true" />
+                <element signature="e#348#349#0" expanded="true" />
+                <element signature="e#381#382#0" expanded="true" />
+                <element signature="e#415#416#0" expanded="true" />
+                <element signature="e#442#443#0" expanded="true" />
+                <element signature="e#488#489#0" expanded="true" />
+                <element signature="e#523#524#0" expanded="true" />
+                <element signature="e#561#562#0" expanded="true" />
+                <element signature="e#588#589#0" expanded="true" />
+                <element signature="e#638#639#0" expanded="true" />
+                <element signature="e#673#674#0" expanded="true" />
+                <element signature="e#716#717#0" expanded="true" />
+                <element signature="e#751#752#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Message.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Message.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="798">
-              <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+            <state relative-caret-position="294">
+              <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#208#209#0" expanded="true" />
-                <element signature="e#235#236#0" expanded="true" />
-                <element signature="e#260#261#0" expanded="true" />
-                <element signature="e#282#283#0" expanded="true" />
-                <element signature="e#314#315#0" expanded="true" />
-                <element signature="e#339#340#0" expanded="true" />
-                <element signature="e#373#374#0" expanded="true" />
-                <element signature="e#401#402#0" expanded="true" />
-                <element signature="e#448#449#0" expanded="true" />
-                <element signature="e#485#486#0" expanded="true" />
-                <element signature="e#517#518#0" expanded="true" />
-                <element signature="e#543#544#0" expanded="true" />
-                <element signature="e#586#587#0" expanded="true" />
-                <element signature="e#619#620#0" expanded="true" />
-                <element signature="e#651#652#0" expanded="true" />
-                <element signature="e#680#681#0" expanded="true" />
+                <element signature="e#275#276#0" expanded="true" />
+                <element signature="e#297#298#0" expanded="true" />
+                <element signature="e#440#441#0" expanded="true" />
+                <element signature="e#468#469#0" expanded="true" />
+                <element signature="e#515#516#0" expanded="true" />
+                <element signature="e#552#553#0" expanded="true" />
+                <element signature="e#584#585#0" expanded="true" />
+                <element signature="e#610#611#0" expanded="true" />
+                <element signature="e#653#654#0" expanded="true" />
+                <element signature="e#686#687#0" expanded="true" />
+                <element signature="e#718#719#0" expanded="true" />
+                <element signature="e#747#748#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -73,8 +101,8 @@
       <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+            <state relative-caret-position="420">
+              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#349#350#0" expanded="true" />
@@ -97,18 +125,18 @@
       <file leaf-file-name="ServerUser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ServerUser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="126">
+              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChatWebSocketHandler.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ChatWebSocketHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ChatWebSocketHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="70" selection-end-column="44" />
+            <state relative-caret-position="309">
+              <caret line="74" column="53" lean-forward="false" selection-start-line="74" selection-start-column="53" selection-end-line="74" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -119,37 +147,10 @@
       <file leaf-file-name="Chat.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Chat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="43" column="40" lean-forward="false" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
+            <state relative-caret-position="309">
+              <caret line="34" column="59" lean-forward="false" selection-start-line="34" selection-start-column="59" selection-end-line="34" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebSocketJSON.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/WebSocketJSON.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="49" column="35" lean-forward="true" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#243#249#0" expanded="true" />
-                <element signature="e#281#282#0" expanded="true" />
-                <element signature="e#307#308#0" expanded="true" />
-                <element signature="e#348#349#0" expanded="true" />
-                <element signature="e#381#382#0" expanded="true" />
-                <element signature="e#415#416#0" expanded="true" />
-                <element signature="e#442#443#0" expanded="true" />
-                <element signature="e#488#489#0" expanded="true" />
-                <element signature="e#523#524#0" expanded="true" />
-                <element signature="e#561#562#0" expanded="true" />
-                <element signature="e#588#589#0" expanded="true" />
-                <element signature="e#638#639#0" expanded="true" />
-                <element signature="e#673#674#0" expanded="true" />
-                <element signature="e#716#717#0" expanded="true" />
-                <element signature="e#751#752#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -180,10 +181,10 @@
         <option value="$PROJECT_DIR$/src/main/java/ServerUser.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Message.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ChatWebSocketHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Chat.java" />
         <option value="$PROJECT_DIR$/src/main/java/WebSocketJSON.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Message.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Chat.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ChatWebSocketHandler.java" />
       </list>
     </option>
   </component>
@@ -679,7 +680,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -688,10 +689,10 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3420398" sideWeight="0.35121602" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3420398" sideWeight="0.35121602" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3420398" sideWeight="0.648784" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3420398" sideWeight="0.648784" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -885,18 +886,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/WebSocketJSON.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="666">
+          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#243#249#0" expanded="true" />
+            <element signature="e#281#282#0" expanded="true" />
+            <element signature="e#307#308#0" expanded="true" />
+            <element signature="e#348#349#0" expanded="true" />
+            <element signature="e#381#382#0" expanded="true" />
+            <element signature="e#415#416#0" expanded="true" />
+            <element signature="e#442#443#0" expanded="true" />
+            <element signature="e#488#489#0" expanded="true" />
+            <element signature="e#523#524#0" expanded="true" />
+            <element signature="e#561#562#0" expanded="true" />
+            <element signature="e#588#589#0" expanded="true" />
+            <element signature="e#638#639#0" expanded="true" />
+            <element signature="e#673#674#0" expanded="true" />
+            <element signature="e#716#717#0" expanded="true" />
+            <element signature="e#751#752#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ServerUser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="126">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+        <state relative-caret-position="420">
+          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#349#350#0" expanded="true" />
@@ -917,71 +943,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Message.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
-          <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+        <state relative-caret-position="294">
+          <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#208#209#0" expanded="true" />
-            <element signature="e#235#236#0" expanded="true" />
-            <element signature="e#260#261#0" expanded="true" />
-            <element signature="e#282#283#0" expanded="true" />
-            <element signature="e#314#315#0" expanded="true" />
-            <element signature="e#339#340#0" expanded="true" />
-            <element signature="e#373#374#0" expanded="true" />
-            <element signature="e#401#402#0" expanded="true" />
-            <element signature="e#448#449#0" expanded="true" />
-            <element signature="e#485#486#0" expanded="true" />
-            <element signature="e#517#518#0" expanded="true" />
-            <element signature="e#543#544#0" expanded="true" />
-            <element signature="e#586#587#0" expanded="true" />
-            <element signature="e#619#620#0" expanded="true" />
-            <element signature="e#651#652#0" expanded="true" />
-            <element signature="e#680#681#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ChatWebSocketHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="70" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#275#276#0" expanded="true" />
+            <element signature="e#297#298#0" expanded="true" />
+            <element signature="e#440#441#0" expanded="true" />
+            <element signature="e#468#469#0" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
+            <element signature="e#552#553#0" expanded="true" />
+            <element signature="e#584#585#0" expanded="true" />
+            <element signature="e#610#611#0" expanded="true" />
+            <element signature="e#653#654#0" expanded="true" />
+            <element signature="e#686#687#0" expanded="true" />
+            <element signature="e#718#719#0" expanded="true" />
+            <element signature="e#747#748#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Chat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="43" column="40" lean-forward="false" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
+        <state relative-caret-position="309">
+          <caret line="34" column="59" lean-forward="false" selection-start-line="34" selection-start-column="59" selection-end-line="34" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/WebSocketJSON.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ChatWebSocketHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="49" column="35" lean-forward="true" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
+        <state relative-caret-position="309">
+          <caret line="74" column="53" lean-forward="false" selection-start-line="74" selection-start-column="53" selection-end-line="74" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#243#249#0" expanded="true" />
-            <element signature="e#281#282#0" expanded="true" />
-            <element signature="e#307#308#0" expanded="true" />
-            <element signature="e#348#349#0" expanded="true" />
-            <element signature="e#381#382#0" expanded="true" />
-            <element signature="e#415#416#0" expanded="true" />
-            <element signature="e#442#443#0" expanded="true" />
-            <element signature="e#488#489#0" expanded="true" />
-            <element signature="e#523#524#0" expanded="true" />
-            <element signature="e#561#562#0" expanded="true" />
-            <element signature="e#588#589#0" expanded="true" />
-            <element signature="e#638#639#0" expanded="true" />
-            <element signature="e#673#674#0" expanded="true" />
-            <element signature="e#716#717#0" expanded="true" />
-            <element signature="e#751#752#0" expanded="true" />
           </folding>
         </state>
       </provider>

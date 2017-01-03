@@ -10,11 +10,13 @@ class ViewConversation extends React.Component
     var user = this.props.user;
     var messagesInState = this.props.messages;
     var messagesToRender = [];
+    var lastMessageAuthor = null;
 
     for (var i = 0, len = messagesInState.length; i < len; i++)
     {
       var message = messagesInState[i];
       var messageClass = "message";
+      var messageAuthorClass = "messageAuthor";
 
       if (message.author == "Server")
       {
@@ -25,9 +27,17 @@ class ViewConversation extends React.Component
         messageClass += " self";
       }
 
+      if (message.author == lastMessageAuthor)
+      {
+        messageAuthorClass += " hidden";
+        messageClass += " running";
+      }
+
+      lastMessageAuthor = message.author;
+
       messagesToRender.push(
         <div key={i} className={messageClass} id={"messageID-" + message.id}>
-          <span className="messageAuthor">{message.author}</span>
+          <span className={messageAuthorClass}>{message.author}</span>
           <span className="messageContents">{message.contents}</span>
           <span className="messageTimestamp">{message.timestamp}</span>
         </div>

@@ -16,11 +16,13 @@ html { background: #EFEFEF url(assets/symphony.png); font-family: 'HelveticaNeue
 #chatScreen #mainPanel #conversation { background: #FFF; border: 1px solid #E2E2E2; border-radius: 5px; bottom: 120px; left: 10px; position: absolute; right: 10px; top: 10px; }
 #chatScreen #mainPanel #conversation #conversationMessages { bottom: 0; left: 10px; position: absolute; right: 10px; top: 40px; }
   .message { display: block; padding-top: 10px; overflow: hidden; }
+  .message.running { padding-top: 2px; }
   .message .messageAuthor { clear: both; color: #CCC; float: left; font-size: 12px; height: 20px; }
+  .message .messageAuthor.hidden { display: none; }
   .message .messageContents { background: #F1F0F0; border-radius: 15px; clear: both; display: block; float: left; padding: 6px 15px; }
   .message .messageTimestamp { clear: both; display: none; float: left; }
   .message.server .messageAuthor { display: none; }
-  .message.server .messageContents { background: none; float: none; font-size: 12px; font-style: italic; font-weight: bold; text-align: center; }
+  .message.server .messageContents { background: none; color: #BBB; float: none; font-size: 12px; font-style: italic; font-weight: bold; text-align: center; }
   .message.self .messageAuthor { float: right; }
   .message.self .messageContents { background: #098AC6; color: #FFF; float: right; }
 

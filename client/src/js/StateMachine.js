@@ -1,7 +1,7 @@
 // Import state machine components
 import { ViewStateMachine, UserStateMachine, UserListStateMachine, MessageStateMachine } from './StateMachineComponents.js';
 // Import state machine actions
-import { AUTHENTICATE, RECEIVE_MESSAGE, SEND_MESSAGE, CONFIRM_RECEPTION } from './StateMachineDefinitions.js';
+import { RECEIVE_MESSAGE, SEND_MESSAGE, CONFIRM_RECEPTION } from './StateMachineDefinitions.js';
 // Import state definitions
 import { VIEW_STATE } from './StateMachineDefinitions.js';
 
@@ -13,8 +13,8 @@ export const initialState = {
   error: false,
   view: VIEW_STATE.SPEAK_SCREEN,
   user: {
+    id: null,
     username: "John Doe",
-    authenticated: true,
     lastActive: now
   },
   userList: [],
