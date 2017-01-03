@@ -48,6 +48,9 @@ const mapDispatchToProps = function(dispatch) {
     onUsernameChange: (user) => {
       dispatch(updateUsername(user));
     },
+    onActivity: (user) => {
+      dispatch(updateLastActive(user));
+    },
     disconnectUser: (id) => {
       dispatch(disconnectUserID(id));
     }

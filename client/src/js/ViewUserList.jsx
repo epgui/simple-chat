@@ -22,6 +22,7 @@ class ViewUserList extends React.Component
             id={user.id}
             username={user.username}
             lastActive={user.lastActive}
+            connected={user.connected}
           />
         );
       }

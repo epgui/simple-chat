@@ -33368,21 +33368,20 @@
 	var _StateMachineDefinitions = __webpack_require__(/*! ./StateMachineDefinitions.js */ 523);
 	
 	// Get current time
-	
-	// Import state machine actions
+	// Import state machine components
 	var now = new Date();
 	
 	// Initialize application state
 	
 	// Import state definitions
-	// Import state machine components
 	var initialState = exports.initialState = {
 	  error: false,
 	  view: _StateMachineDefinitions.VIEW_STATE.SPEAK_SCREEN,
 	  user: {
 	    id: null,
 	    username: "John Doe",
-	    lastActive: now
+	    lastActive: now,
+	    connected: false
 	  },
 	  userList: [],
 	  messages: []
@@ -33444,10 +33443,13 @@
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	  var action = arguments[1];
 	
+	  var now = new Date() / 1000;
+	
 	  switch (action.type) {
 	    case _StateMachineDefinitions.ASSIGN_USER_ID:
 	      return _extends({}, state, {
-	        id: action.id
+	        id: action.id,
+	        connected: true
 	      });
 	    case _StateMachineDefinitions.UPDATE_USERNAME:
 	      return _extends({}, state, {
@@ -33456,8 +33458,17 @@
 	      });
 	    case _StateMachineDefinitions.SEND_MESSAGE:
 	      return _extends({}, state, {
-	        lastActive: action.message.lastActive
+	        lastActive: now
 	      });
+	    case _StateMachineDefinitions.UPDATE_LAST_ACTIVE:
+	      if (action.user.id == state.id) {
+	        return _extends({}, state, {
+	          lastActive: now
+	        });
+	      } else {
+	        return state;
+	      }
+	
 	    default:
 	      return state;
 	  }
@@ -33479,6 +33490,10 @@
 	      return state.map(function (u) {
 	        return modifyUserList(u, action);
 	      });
+	    case _StateMachineDefinitions.UPDATE_LAST_ACTIVE:
+	      return state.map(function (u) {
+	        return modifyUserList(u, action);
+	      });
 	    case _StateMachineDefinitions.DISCONNECT_USER:
 	      return state.map(function (u) {
 	        return modifyUserList(u, action);
@@ -33495,16 +33510,21 @@
 	  if (state.id !== action.user.id) {
 	    return state;
 	  } else {
-	    var now = new Date();
+	    var now = new Date() / 1000;
 	    switch (action.type) {
-	      case _StateMachineDefinitions.DISCONNECT_USER:
-	        return _extends({}, state, {
-	          connected: false
-	        });
 	      case _StateMachineDefinitions.UPDATE_USERNAME:
 	        return _extends({}, state, {
 	          username: action.user.username,
 	          lastActive: now
+	        });
+	      case _StateMachineDefinitions.UPDATE_LAST_ACTIVE:
+	        console.log("updating lastActive");
+	        return _extends({}, state, {
+	          lastActive: now
+	        });
+	      case _StateMachineDefinitions.DISCONNECT_USER:
+	        return _extends({}, state, {
+	          connected: false
 	        });
 	      default:
 	        return state;
@@ -33574,6 +33594,7 @@
 	exports.addUserToList = addUserToList;
 	exports.updateUsername = updateUsername;
 	exports.disconnectUserID = disconnectUserID;
+	exports.updateLastActive = updateLastActive;
 	// Define all possible view states
 	var VIEW_STATE = exports.VIEW_STATE = {
 	  LOGIN_SCREEN: "login-screen",
@@ -33588,6 +33609,7 @@
 	var ADD_USER_TO_LIST = exports.ADD_USER_TO_LIST = "add-user-to-list";
 	var DISCONNECT_USER = exports.DISCONNECT_USER = "disconnect-user";
 	var UPDATE_USERNAME = exports.UPDATE_USERNAME = "update-username";
+	var UPDATE_LAST_ACTIVE = exports.UPDATE_LAST_ACTIVE = "update-last-active";
 	
 	// Define action
 	function assignUserID(user) {
@@ -33636,6 +33658,13 @@
 	  return {
 	    type: DISCONNECT_USER,
 	    id: id
+	  };
+	}
+	
+	function updateLastActive(user) {
+	  return {
+	    type: UPDATE_LAST_ACTIVE,
+	    user: user
 	  };
 	}
 
@@ -33703,6 +33732,9 @@
 	    },
 	    onUsernameChange: function onUsernameChange(user) {
 	      dispatch((0, _StateMachineDefinitions.updateUsername)(user));
+	    },
+	    onActivity: function onActivity(user) {
+	      dispatch(updateLastActive(user));
 	    },
 	    disconnectUser: function disconnectUser(id) {
 	      dispatch(disconnectUserID(id));
@@ -33780,7 +33812,8 @@
 	            onMessageConfirm: this.props.confirm,
 	            onUserConnect: this.props.addUser,
 	            onUserDisconnect: this.props.disconnectUser,
-	            onUsernameChange: this.props.onUsernameChange
+	            onUsernameChange: this.props.onUsernameChange,
+	            onActivity: this.props.onActivity
 	          }));
 	          break;
 	        default:
@@ -33991,7 +34024,8 @@
 	            user: this.props.user,
 	            userList: this.props.userList,
 	            onUserConnect: this.props.onUserConnect,
-	            onUserDisconnect: this.props.onUserDisconnect
+	            onUserDisconnect: this.props.onUserDisconnect,
+	            onActivity: this.props.onActivity
 	          })
 	        )
 	      );
@@ -34220,7 +34254,8 @@
 	            key: i,
 	            id: user.id,
 	            username: user.username,
-	            lastActive: user.lastActive
+	            lastActive: user.lastActive,
+	            connected: user.connected
 	          }));
 	        }
 	      }
@@ -34282,8 +34317,28 @@
 	  }
 	
 	  _createClass(ViewUser, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      //setTimeout(this.onUserIdle(), 5000); // Check every 5 seconds
+	    }
+	  }, {
+	    key: 'onUserIdle',
+	    value: function onUserIdle() {}
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var now = new Date() / 1000;
+	      var statusIconColor = "red";
+	
+	      if (this.props.connected == true) {
+	        // Indicator light turns green for users active less than 5 minutes ago.
+	        if (now - this.props.lastActive <= 300) {
+	          statusIconColor = "green";
+	        } else {
+	          statusIconColor = "yellow";
+	        }
+	      }
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'user' },
@@ -34291,6 +34346,11 @@
 	          'span',
 	          { className: 'username' },
 	          this.props.username
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'userStatusIcon' },
+	          _react2.default.createElement('img', { src: "assets/" + statusIconColor + "Light.png" })
 	        )
 	      );
 	    }

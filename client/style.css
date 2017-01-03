@@ -1,5 +1,5 @@
-html { background: #EFEFEF url(assets/symphony.png); font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif; font-size: 16px; }
-#app { bottom: 0; left: 0; position: absolute; right: 0; top: 0; }
+html { background: #EFEFEF url(assets/symphony.png); font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif; font-size: 16px; min-width: 600px; }
+#app { bottom: 0; left: 0; min-width: 600px; position: absolute; right: 0; top: 0; }
 
 /* Login */
 #loginScreen { background: #FFF; border: 1px solid #E2E2E2; border-radius: 5px; height: 200px; left: 50%; margin: -100px 0 0 -200px; position: absolute; text-align: center; top: 50%; width: 400px; }
@@ -9,7 +9,8 @@ html { background: #EFEFEF url(assets/symphony.png); font-family: 'HelveticaNeue
 #chatScreen { bottom: 0; left: 0; position: absolute; right: 0; top: 0; }
 #chatScreen #userList { background: #FFF; border: 1px solid #E2E2E2; border-radius: 5px; bottom: 10px; position: absolute; right: 10px; top: 10px; width: 190px; }
 #chatScreen #userList #users { bottom: 0; left: 0; padding: 40px 10px 10px 10px; position: absolute; right: 0; top: 0; }
-  .user { padding-bottom: 10px; }
+  .user { overflow: hidden; padding-bottom: 10px; }
+  .user .userStatusIcon { float: right; padding-top: 2px; }
 
 /* Read messages */
 #chatScreen #mainPanel { bottom: 0; left: 0; position: absolute; right: 200px; top: 0; }
@@ -19,10 +20,10 @@ html { background: #EFEFEF url(assets/symphony.png); font-family: 'HelveticaNeue
   .message.running { padding-top: 2px; }
   .message .messageAuthor { clear: both; color: #CCC; float: left; font-size: 12px; height: 20px; }
   .message .messageAuthor.hidden { display: none; }
-  .message .messageContents { background: #F1F0F0; border-radius: 15px; clear: both; display: block; float: left; padding: 6px 15px; }
+  .message .messageContents { background: #F1F0F0; border-radius: 15px; clear: both; display: block; float: left; max-width: 60%; padding: 6px 15px; }
   .message .messageTimestamp { clear: both; display: none; float: left; }
   .message.server .messageAuthor { display: none; }
-  .message.server .messageContents { background: none; color: #BBB; float: none; font-size: 12px; font-style: italic; font-weight: bold; text-align: center; }
+  .message.server .messageContents { background: none; color: #BBB; float: none; font-size: 12px; font-style: italic; font-weight: bold; max-width: 100%; text-align: center; width: 100%; }
   .message.self .messageAuthor { float: right; }
   .message.self .messageContents { background: #098AC6; color: #FFF; float: right; }
 

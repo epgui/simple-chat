@@ -5,13 +5,14 @@ export const VIEW_STATE = {
 };
 
 // Define all possible action types
-export const ASSIGN_USER_ID    = "assign-user-id";
-export const RECEIVE_MESSAGE   = "receive-message";
-export const SEND_MESSAGE      = "send-message";
-export const CONFIRM_RECEPTION = "confirm-reception";
-export const ADD_USER_TO_LIST  = "add-user-to-list";
-export const DISCONNECT_USER   = "disconnect-user";
-export const UPDATE_USERNAME   = "update-username";
+export const ASSIGN_USER_ID     = "assign-user-id";
+export const RECEIVE_MESSAGE    = "receive-message";
+export const SEND_MESSAGE       = "send-message";
+export const CONFIRM_RECEPTION  = "confirm-reception";
+export const ADD_USER_TO_LIST   = "add-user-to-list";
+export const DISCONNECT_USER    = "disconnect-user";
+export const UPDATE_USERNAME    = "update-username";
+export const UPDATE_LAST_ACTIVE = "update-last-active";
 
 // Define action
 export function assignUserID(user) {
@@ -60,5 +61,12 @@ export function disconnectUserID(id) {
   return {
     type: DISCONNECT_USER,
     id
+  }
+}
+
+export function updateLastActive(user) {
+  return {
+    type: UPDATE_LAST_ACTIVE,
+    user
   }
 }

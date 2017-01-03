@@ -153,6 +153,7 @@ class ViewChatScreen extends React.Component
             userList={this.props.userList}
             onUserConnect={this.props.onUserConnect}
             onUserDisconnect={this.props.onUserDisconnect}
+            onActivity={this.props.onActivity}
           />
         </div>
       </div>

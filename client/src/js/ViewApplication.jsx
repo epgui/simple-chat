@@ -27,6 +27,7 @@ class ViewApplication extends React.Component
             onUserConnect={this.props.addUser}
             onUserDisconnect={this.props.disconnectUser}
             onUsernameChange={this.props.onUsernameChange}
+            onActivity={this.props.onActivity}
           />
         );
         break;

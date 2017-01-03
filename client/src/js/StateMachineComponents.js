@@ -6,7 +6,8 @@ import {
   CONFIRM_RECEPTION,
   ADD_USER_TO_LIST,
   DISCONNECT_USER,
-  UPDATE_USERNAME
+  UPDATE_USERNAME,
+  UPDATE_LAST_ACTIVE
 } from './StateMachineDefinitions.js';
 
 // Import state definitions
@@ -23,12 +24,15 @@ export function ViewStateMachine(state = VIEW_STATE.LOGIN_SCREEN, action)
 
 export function UserStateMachine(state = {}, action)
 {
+  var now = new Date() / 1000;
+
   switch (action.type)
   {
     case ASSIGN_USER_ID:
       return {
         ...state,
-        id: action.id
+        id: action.id,
+        connected: true
       };
     case UPDATE_USERNAME:
       return {
@@ -39,8 +43,21 @@ export function UserStateMachine(state = {}, action)
     case SEND_MESSAGE:
       return {
         ...state,
-        lastActive: action.message.lastActive
+        lastActive: now
       };
+    case UPDATE_LAST_ACTIVE:
+      if (action.user.id == state.id)
+      {
+        return {
+          ...state,
+          lastActive: now
+        };
+      }
+      else
+      {
+        return state;
+      }
+
     default:
       return state;
   }
@@ -62,6 +79,8 @@ export function UserListStateMachine(state = [], action)
       ];
     case UPDATE_USERNAME:
       return state.map(u => modifyUserList(u, action));
+    case UPDATE_LAST_ACTIVE:
+      return state.map(u => modifyUserList(u, action));
     case DISCONNECT_USER:
       return state.map(u => modifyUserList(u, action));
     default:
@@ -77,20 +96,26 @@ function modifyUserList(state = {}, action)
   }
   else
   {
-    var now = new Date();
+    var now = new Date() / 1000;
     switch (action.type)
     {
-      case DISCONNECT_USER:
-        return {
-          ...state,
-          connected: false
-        };
       case UPDATE_USERNAME:
         return {
           ...state,
           username: action.user.username,
           lastActive: now
-        }
+        };
+      case UPDATE_LAST_ACTIVE:
+        console.log("updating lastActive");
+        return {
+          ...state,
+          lastActive: now
+        };
+      case DISCONNECT_USER:
+        return {
+          ...state,
+          connected: false
+        };
       default:
         return state;
     }
