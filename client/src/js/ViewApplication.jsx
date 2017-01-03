@@ -20,9 +20,12 @@ class ViewApplication extends React.Component
             error={this.props.error}
             user={this.props.user}
             messages={this.props.messages}
+            userList={this.props.userList}
             onMessageSend={this.props.send}
             onMessageReceive={this.props.receive}
             onMessageConfirm={this.props.confirm}
+            onUserConnect={this.props.addUser}
+            onUserDisconnect={this.props.disconnectUser}
           />
         );
         break;

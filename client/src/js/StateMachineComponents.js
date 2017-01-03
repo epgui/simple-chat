@@ -1,5 +1,13 @@
 // Import state machine actions
-import { AUTHENTICATE, RECEIVE_MESSAGE, SEND_MESSAGE, CONFIRM_RECEPTION } from './StateMachineDefinitions.js';
+import {
+  AUTHENTICATE,
+  RECEIVE_MESSAGE,
+  SEND_MESSAGE,
+  CONFIRM_RECEPTION,
+  ADD_USER_TO_LIST,
+  DISCONNECT_USER
+} from './StateMachineDefinitions.js';
+
 // Import state definitions
 import { VIEW_STATE } from './StateMachineDefinitions.js';
 
@@ -32,6 +40,54 @@ export function UserStateMachine(state = {}, action)
       };
     default:
       return state;
+  }
+}
+
+export function UserListStateMachine(state = [], action)
+{
+  switch (action.type)
+  {
+    case ADD_USER_TO_LIST:
+      return [
+        ...state,
+        {
+          id:         action.user.id,
+          username:   action.user.username,
+          lastActive: action.user.lastActive,
+          connected:  true
+        }
+      ];
+    case DISCONNECT_USER:
+      return state.map(u => modifyUserList(u, action));
+    default:
+      return state;
+  }
+}
+
+function modifyUserList(state = {}, action)
+{
+  if (state.id !== action.id)
+  {
+    return state
+  }
+  else
+  {
+    switch (action.type)
+    {
+      case DISCONNECT_USER:
+        return {
+          ...state,
+          connected: false
+        };
+      case UPDATE_LAST_ACTIVE:
+        var now = new Date();
+        return {
+          ...state,
+          lastActive: now
+        };
+      default:
+        return state;
+    }
   }
 }
 

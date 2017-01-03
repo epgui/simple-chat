@@ -26,15 +26,11 @@ class ViewChatScreen extends React.Component
       "timestamp": data.message.timestamp
     };
 
-    // var userList = []
-    // for (var i = 0, len = websocketCommunication.data.sessionUserMap.length; i < len; i++)
-    // {
-    //   var userFromList = websocketCommunication.data.sessionUserMap[i];
-    //   userList.push(userFromList.username);
-    // }
+    var userList = data.userList;
+    console.log(userList);
+    this.updateUserList(data.userList);
 
     // if message is an actual user message
-    console.log(message);
     this.props.onMessageReceive(message);
 
     // otherwise if message is a read receipt
@@ -42,6 +38,34 @@ class ViewChatScreen extends React.Component
 
     // otherwise if message pertains to user list
     // console.log("There was a change to the user list!");
+  }
+
+  updateUserList(userList) // Probably very inefficient
+  {
+    var unmatchedUsers = [];
+
+    for (var i = 0, len = userList.length; i < len; i++)
+    {
+      var matched = false;
+
+      for (var j = 0, len = this.props.userList.length; j < len; j++)
+      {
+        if (userList[i].username == this.props.userList[j].username)
+        {
+          matched = true;
+        }
+      }
+
+      if (matched == false)
+      {
+        unmatchedUsers.push(userList[i]);
+      }
+    }
+
+    if (unmatchedUsers.length > 0)
+    {
+      this.props.onUserConnect(unmatchedUsers[0]);
+    }
   }
 
   sendMessage(message)
@@ -60,8 +84,7 @@ class ViewChatScreen extends React.Component
       }
 
       this.connection.send(JSON.stringify(json));
-      this.props.onMessageSend(json);
-      console.log(json);
+      // this.props.onMessageSend(json);
     }
   }
 
@@ -93,7 +116,13 @@ class ViewChatScreen extends React.Component
           />
         </div>
         <div id="userList">
-          <ViewUserList/>
+          <ViewUserList
+            key={1}
+            user={this.props.user}
+            userList={this.props.userList}
+            onUserConnect={this.props.onUserConnect}
+            onUserDisconnect={this.props.onUserDisconnect}
+          />
         </div>
       </div>
     );

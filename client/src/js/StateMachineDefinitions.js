@@ -9,6 +9,8 @@ export const AUTHENTICATE      = "authenticate";
 export const RECEIVE_MESSAGE   = "receive-message";
 export const SEND_MESSAGE      = "send-message";
 export const CONFIRM_RECEPTION = "confirm-reception";
+export const ADD_USER_TO_LIST  = "add-user-to-list";
+export const DISCONNECT_USER   = "disconnect-user";
 
 // Define action creators
 export function authenticate(user) {
@@ -37,4 +39,18 @@ export function confirmReception(index) {
     type: CONFIRM_RECEPTION,
     index
   };
+}
+
+export function addUserToList(user) {
+  return {
+    type: ADD_USER_TO_LIST,
+    user
+  }
+}
+
+export function disconnectUserID(id) {
+  return {
+    type: DISCONNECT_USER,
+    id
+  }
 }

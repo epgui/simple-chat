@@ -39,7 +39,10 @@ public class Chat {
       WebSocketJSON communication = new WebSocketJSON();
       communication.setSender(sender);
       communication.setMessage(message);
-      communication.setSessionUserMap(sessionUserMap);
+      for(Map.Entry<Session, User> sessionUser : sessionUserMap.entrySet()) {
+         User user = sessionUser.getValue();
+         communication.addUserToList(user);
+      }
 
       System.out.println("Preparing to broadcast the following communication:\n");
       System.out.println(convertObjectToJSON(communication) + "\n");

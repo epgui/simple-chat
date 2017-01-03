@@ -7,8 +7,8 @@ class ViewUser extends React.Component
   render()
   {
     return (
-      <div class="user">
-
+      <div className="user">
+        <span className="username">{this.props.username}</span>
       </div>
     );
   }

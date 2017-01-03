@@ -1,5 +1,5 @@
 // Import state machine components
-import { ViewStateMachine, UserStateMachine, MessageStateMachine } from './StateMachineComponents.js';
+import { ViewStateMachine, UserStateMachine, UserListStateMachine, MessageStateMachine } from './StateMachineComponents.js';
 // Import state machine actions
 import { AUTHENTICATE, RECEIVE_MESSAGE, SEND_MESSAGE, CONFIRM_RECEPTION } from './StateMachineDefinitions.js';
 // Import state definitions
@@ -17,6 +17,7 @@ export const initialState = {
     authenticated: true,
     lastActive: now
   },
+  userList: [],
   messages: []
 };
 
@@ -27,6 +28,7 @@ export function StateMachine(state = initialState, action)
     error:    false, // Because mistakes are for noobs
     view:     ViewStateMachine(state.view, action),
     user:     UserStateMachine(state.user, action),
+    userList: UserListStateMachine(state.userList, action),
     messages: MessageStateMachine(state.messages, action)
   }
 }

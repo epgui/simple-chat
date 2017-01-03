@@ -33384,6 +33384,7 @@
 	    authenticated: true,
 	    lastActive: now
 	  },
+	  userList: [],
 	  messages: []
 	};
 	
@@ -33396,6 +33397,7 @@
 	    error: false, // Because mistakes are for noobs
 	    view: (0, _StateMachineComponents.ViewStateMachine)(state.view, action),
 	    user: (0, _StateMachineComponents.UserStateMachine)(state.user, action),
+	    userList: (0, _StateMachineComponents.UserListStateMachine)(state.userList, action),
 	    messages: (0, _StateMachineComponents.MessageStateMachine)(state.messages, action)
 	  };
 	}
@@ -33415,11 +33417,13 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; // Import state machine actions
 	
+	
 	// Import state definitions
 	
 	
 	exports.ViewStateMachine = ViewStateMachine;
 	exports.UserStateMachine = UserStateMachine;
+	exports.UserListStateMachine = UserListStateMachine;
 	exports.MessageStateMachine = MessageStateMachine;
 	
 	var _StateMachineDefinitions = __webpack_require__(/*! ./StateMachineDefinitions.js */ 523);
@@ -33455,6 +33459,50 @@
 	      });
 	    default:
 	      return state;
+	  }
+	}
+	
+	function UserListStateMachine() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case _StateMachineDefinitions.ADD_USER_TO_LIST:
+	      return [].concat(_toConsumableArray(state), [{
+	        id: action.user.id,
+	        username: action.user.username,
+	        lastActive: action.user.lastActive,
+	        connected: true
+	      }]);
+	    case _StateMachineDefinitions.DISCONNECT_USER:
+	      return state.map(function (u) {
+	        return modifyUserList(u, action);
+	      });
+	    default:
+	      return state;
+	  }
+	}
+	
+	function modifyUserList() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var action = arguments[1];
+	
+	  if (state.id !== action.id) {
+	    return state;
+	  } else {
+	    switch (action.type) {
+	      case _StateMachineDefinitions.DISCONNECT_USER:
+	        return _extends({}, state, {
+	          connected: false
+	        });
+	      case UPDATE_LAST_ACTIVE:
+	        var now = new Date();
+	        return _extends({}, state, {
+	          lastActive: now
+	        });
+	      default:
+	        return state;
+	    }
 	  }
 	}
 	
@@ -33517,6 +33565,8 @@
 	exports.receiveMessage = receiveMessage;
 	exports.sendMessage = sendMessage;
 	exports.confirmReception = confirmReception;
+	exports.addUserToList = addUserToList;
+	exports.disconnectUserID = disconnectUserID;
 	// Define all possible view states
 	var VIEW_STATE = exports.VIEW_STATE = {
 	  LOGIN_SCREEN: "login-screen",
@@ -33528,6 +33578,8 @@
 	var RECEIVE_MESSAGE = exports.RECEIVE_MESSAGE = "receive-message";
 	var SEND_MESSAGE = exports.SEND_MESSAGE = "send-message";
 	var CONFIRM_RECEPTION = exports.CONFIRM_RECEPTION = "confirm-reception";
+	var ADD_USER_TO_LIST = exports.ADD_USER_TO_LIST = "add-user-to-list";
+	var DISCONNECT_USER = exports.DISCONNECT_USER = "disconnect-user";
 	
 	// Define action creators
 	function authenticate(user) {
@@ -33555,6 +33607,20 @@
 	  return {
 	    type: CONFIRM_RECEPTION,
 	    index: index
+	  };
+	}
+	
+	function addUserToList(user) {
+	  return {
+	    type: ADD_USER_TO_LIST,
+	    user: user
+	  };
+	}
+	
+	function disconnectUserID(id) {
+	  return {
+	    type: DISCONNECT_USER,
+	    id: id
 	  };
 	}
 
@@ -33598,6 +33664,7 @@
 	      authenticated: state.user.authenticated,
 	      lastActive: state.user.lastActive
 	    },
+	    userList: state.userList,
 	    messages: state.messages
 	  };
 	};
@@ -33615,6 +33682,12 @@
 	    },
 	    confirm: function confirm(id) {
 	      dispatch((0, _StateMachineDefinitions.confirmReception)(id));
+	    },
+	    addUser: function addUser(user) {
+	      dispatch((0, _StateMachineDefinitions.addUserToList)(user));
+	    },
+	    disconnectUser: function disconnectUser(id) {
+	      dispatch(disconnectUserID(id));
 	    }
 	  };
 	};
@@ -33683,9 +33756,12 @@
 	            error: this.props.error,
 	            user: this.props.user,
 	            messages: this.props.messages,
+	            userList: this.props.userList,
 	            onMessageSend: this.props.send,
 	            onMessageReceive: this.props.receive,
-	            onMessageConfirm: this.props.confirm
+	            onMessageConfirm: this.props.confirm,
+	            onUserConnect: this.props.addUser,
+	            onUserDisconnect: this.props.disconnectUser
 	          }));
 	          break;
 	        default:
@@ -33778,15 +33854,11 @@
 	        "timestamp": data.message.timestamp
 	      };
 	
-	      // var userList = []
-	      // for (var i = 0, len = websocketCommunication.data.sessionUserMap.length; i < len; i++)
-	      // {
-	      //   var userFromList = websocketCommunication.data.sessionUserMap[i];
-	      //   userList.push(userFromList.username);
-	      // }
+	      var userList = data.userList;
+	      console.log(userList);
+	      this.updateUserList(data.userList);
 	
 	      // if message is an actual user message
-	      console.log(message);
 	      this.props.onMessageReceive(message);
 	
 	      // otherwise if message is a read receipt
@@ -33794,6 +33866,30 @@
 	
 	      // otherwise if message pertains to user list
 	      // console.log("There was a change to the user list!");
+	    }
+	  }, {
+	    key: 'updateUserList',
+	    value: function updateUserList(userList) // Probably very inefficient
+	    {
+	      var unmatchedUsers = [];
+	
+	      for (var i = 0, len = userList.length; i < len; i++) {
+	        var matched = false;
+	
+	        for (var j = 0, len = this.props.userList.length; j < len; j++) {
+	          if (userList[i].username == this.props.userList[j].username) {
+	            matched = true;
+	          }
+	        }
+	
+	        if (matched == false) {
+	          unmatchedUsers.push(userList[i]);
+	        }
+	      }
+	
+	      if (unmatchedUsers.length > 0) {
+	        this.props.onUserConnect(unmatchedUsers[0]);
+	      }
 	    }
 	  }, {
 	    key: 'sendMessage',
@@ -33811,8 +33907,7 @@
 	        };
 	
 	        this.connection.send(JSON.stringify(json));
-	        this.props.onMessageSend(json);
-	        console.log(json);
+	        // this.props.onMessageSend(json);
 	      }
 	    }
 	  }, {
@@ -33849,7 +33944,13 @@
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'userList' },
-	          _react2.default.createElement(_ViewUserList2.default, null)
+	          _react2.default.createElement(_ViewUserList2.default, {
+	            key: 1,
+	            user: this.props.user,
+	            userList: this.props.userList,
+	            onUserConnect: this.props.onUserConnect,
+	            onUserDisconnect: this.props.onUserDisconnect
+	          })
 	        )
 	      );
 	    }
@@ -33911,10 +34012,17 @@
 	
 	      for (var i = 0, len = messagesInState.length; i < len; i++) {
 	        var message = messagesInState[i];
+	        var messageClass = "message";
+	
+	        if (message.author == "Server") {
+	          messageClass += " server";
+	        } else if (message.author == this.props.user.username) {
+	          messageClass += " self";
+	        }
 	
 	        messagesToRender.push(_react2.default.createElement(
 	          'div',
-	          { key: i, className: 'message', id: "messageID-" + message.id },
+	          { key: i, className: messageClass, id: "messageID-" + message.id },
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'messageAuthor' },
@@ -34050,7 +34158,21 @@
 	  _createClass(ViewUserList, [{
 	    key: 'render',
 	    value: function render() {
-	      var users = [];
+	      var userList = this.props.userList;
+	      var usersToRender = [];
+	
+	      for (var i = 0, len = userList.length; i < len; i++) {
+	        var user = userList[i];
+	
+	        if (user.connected == true) {
+	          usersToRender.push(_react2.default.createElement(_ViewUser2.default, {
+	            key: i,
+	            id: user.id,
+	            username: user.username,
+	            lastActive: user.lastActive
+	          }));
+	        }
+	      }
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -34060,7 +34182,7 @@
 	          null,
 	          'User list'
 	        ),
-	        users
+	        usersToRender
 	      );
 	    }
 	  }]);
@@ -34111,7 +34233,15 @@
 	  _createClass(ViewUser, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('div', { 'class': 'user' });
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'user' },
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'username' },
+	          this.props.username
+	        )
+	      );
 	    }
 	  }]);
 	
@@ -34184,6 +34314,7 @@
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
 	      this.props.sendMessage(this.state.value);
+	      this.state.value = '';
 	    }
 	  }, {
 	    key: 'handleKeyPress',

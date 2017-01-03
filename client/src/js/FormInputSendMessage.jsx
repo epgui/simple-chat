@@ -29,6 +29,7 @@ class FormInputSendMessage extends React.Component
   {
     event.preventDefault();
     this.props.sendMessage(this.state.value);
+    this.state.value = '';
   }
 
   handleKeyPress(event)

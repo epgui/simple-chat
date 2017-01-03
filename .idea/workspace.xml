@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14c72f65-9bb1-4a4e-bda5-4125c5f27102" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/Chat.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/WebSocketJSON.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/bundle.js" afterPath="$PROJECT_DIR$/client/bundle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/bundle.js.map" afterPath="$PROJECT_DIR$/client/bundle.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/StateMachine.js" afterPath="$PROJECT_DIR$/client/src/js/StateMachine.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/StateMachineComponents.js" afterPath="$PROJECT_DIR$/client/src/js/StateMachineComponents.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/StateMachineDefinitions.js" afterPath="$PROJECT_DIR$/client/src/js/StateMachineDefinitions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/ViewChatScreen.jsx" afterPath="$PROJECT_DIR$/client/src/js/ViewChatScreen.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/style.css" afterPath="$PROJECT_DIR$/client/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Chat.java" afterPath="$PROJECT_DIR$/src/main/java/Chat.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/WebSocketJSON.java" afterPath="$PROJECT_DIR$/src/main/java/WebSocketJSON.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -106,11 +116,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Chat.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Chat.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Chat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="48" column="44" lean-forward="true" selection-start-line="48" selection-start-column="44" selection-end-line="48" selection-end-column="44" />
+            <state relative-caret-position="105">
+              <caret line="43" column="40" lean-forward="false" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -118,25 +128,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WebSocketJSON.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="WebSocketJSON.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/WebSocketJSON.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="41" column="38" lean-forward="false" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
+            <state relative-caret-position="310">
+              <caret line="49" column="35" lean-forward="true" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#274#275#0" expanded="true" />
-                <element signature="e#300#301#0" expanded="true" />
-                <element signature="e#341#342#0" expanded="true" />
-                <element signature="e#374#375#0" expanded="true" />
-                <element signature="e#408#409#0" expanded="true" />
-                <element signature="e#435#436#0" expanded="true" />
-                <element signature="e#481#482#0" expanded="true" />
-                <element signature="e#516#517#0" expanded="true" />
-                <element signature="e#568#569#0" expanded="true" />
-                <element signature="e#602#603#0" expanded="true" />
+                <element signature="e#243#249#0" expanded="true" />
+                <element signature="e#281#282#0" expanded="true" />
+                <element signature="e#307#308#0" expanded="true" />
+                <element signature="e#348#349#0" expanded="true" />
+                <element signature="e#381#382#0" expanded="true" />
+                <element signature="e#415#416#0" expanded="true" />
+                <element signature="e#442#443#0" expanded="true" />
+                <element signature="e#488#489#0" expanded="true" />
+                <element signature="e#523#524#0" expanded="true" />
+                <element signature="e#561#562#0" expanded="true" />
+                <element signature="e#588#589#0" expanded="true" />
+                <element signature="e#638#639#0" expanded="true" />
                 <element signature="e#673#674#0" expanded="true" />
-                <element signature="e#722#723#0" expanded="true" />
+                <element signature="e#716#717#0" expanded="true" />
+                <element signature="e#751#752#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -165,12 +178,12 @@
         <option value="$PROJECT_DIR$/.idea/compiler.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/ServerUser.java" />
-        <option value="$PROJECT_DIR$/src/main/java/WebSocketJSON.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/Message.java" />
         <option value="$PROJECT_DIR$/src/main/java/ChatWebSocketHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/Chat.java" />
+        <option value="$PROJECT_DIR$/src/main/java/WebSocketJSON.java" />
       </list>
     </option>
   </component>
@@ -666,19 +679,19 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33830845" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33830845" sideWeight="0.4914163" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3420398" sideWeight="0.34763947" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3420398" sideWeight="0.35121602" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3420398" sideWeight="0.6523605" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3420398" sideWeight="0.648784" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -928,28 +941,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/WebSocketJSON.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="41" column="38" lean-forward="false" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#274#275#0" expanded="true" />
-            <element signature="e#300#301#0" expanded="true" />
-            <element signature="e#341#342#0" expanded="true" />
-            <element signature="e#374#375#0" expanded="true" />
-            <element signature="e#408#409#0" expanded="true" />
-            <element signature="e#435#436#0" expanded="true" />
-            <element signature="e#481#482#0" expanded="true" />
-            <element signature="e#516#517#0" expanded="true" />
-            <element signature="e#568#569#0" expanded="true" />
-            <element signature="e#602#603#0" expanded="true" />
-            <element signature="e#673#674#0" expanded="true" />
-            <element signature="e#722#723#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ChatWebSocketHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
@@ -962,10 +953,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Chat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="48" column="44" lean-forward="true" selection-start-line="48" selection-start-column="44" selection-end-line="48" selection-end-column="44" />
+        <state relative-caret-position="105">
+          <caret line="43" column="40" lean-forward="false" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/WebSocketJSON.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="49" column="35" lean-forward="true" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#243#249#0" expanded="true" />
+            <element signature="e#281#282#0" expanded="true" />
+            <element signature="e#307#308#0" expanded="true" />
+            <element signature="e#348#349#0" expanded="true" />
+            <element signature="e#381#382#0" expanded="true" />
+            <element signature="e#415#416#0" expanded="true" />
+            <element signature="e#442#443#0" expanded="true" />
+            <element signature="e#488#489#0" expanded="true" />
+            <element signature="e#523#524#0" expanded="true" />
+            <element signature="e#561#562#0" expanded="true" />
+            <element signature="e#588#589#0" expanded="true" />
+            <element signature="e#638#639#0" expanded="true" />
+            <element signature="e#673#674#0" expanded="true" />
+            <element signature="e#716#717#0" expanded="true" />
+            <element signature="e#751#752#0" expanded="true" />
           </folding>
         </state>
       </provider>
