@@ -11,6 +11,7 @@ class ViewUserList extends React.Component
 
     return (
       <div id="users">
+        <h2>User list</h2>
         {users}
       </div>
     );

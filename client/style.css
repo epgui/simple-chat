@@ -3,3 +3,16 @@ html { background: #EFEFEF url(assets/symphony.png); font-family: 'HelveticaNeue
 #app { bottom: 0; left: 0; position: absolute; right: 0; top: 0; }
 #loginScreen { background: #FFF; border: 1px solid #E2E2E2; border-radius: 5px; height: 200px; left: 50%; margin: -100px 0 0 -200px; position: absolute; text-align: center; top: 50%; width: 400px; }
 #loginScreen h1 { display: block; padding-top: 20px; }
+
+#chatScreen { bottom: 0; left: 0; position: absolute; right: 0; top: 0; }
+#chatScreen #userList { background: #FFF; border: 1px solid #E2E2E2; border-radius: 5px; bottom: 10px; position: absolute; right: 10px; top: 10px; width: 190px; }
+#chatScreen #userList #users { bottom: 0; left: 0; position: absolute; right: 0; top: 0; }
+#chatScreen #mainPanel { bottom: 0; left: 0; position: absolute; right: 200px; top: 0; }
+#chatScreen #mainPanel #conversation { background: #FFF; border: 1px solid #E2E2E2; border-radius: 5px; bottom: 120px; left: 10px; position: absolute; right: 10px; top: 10px; }
+#chatScreen #mainPanel #messageForm { background: #FFF; border: 1px solid #E2E2E2; border-radius: 5px; bottom: 10px; height: 100px; left: 10px; position: absolute; right: 10px; }
+#chatScreen #mainPanel #messageForm #messageBox { bottom: 0; left: 0; position: absolute; right: 130px; top: 0; }
+#chatScreen #mainPanel #messageForm #messageBox textarea { background: none; border: 0; color: #888; font-family: Georgia; font-size: 16px; font-style: italic; height: 80px; margin: 0; padding: 10px; resize: none; width: 100%; }
+#chatScreen #mainPanel #messageForm #sendMessageButton { background: #FCFCFC; border-left: 1px solid #E2E2E2; border-radius: 0 4px 4px 0; bottom: 0; color: #888; display: block; line-height: 100px; position: absolute; right: 0; text-align: center; top: 0; width: 100px; }
+
+#chatScreen #userList h2,
+#chatScreen #mainPanel #conversation h2 { background: #65D6FF url(assets/titlebar.png); border-radius: 4px 4px 0 0; color: #FFF; display: block; font-size: 16px; font-weight: normal; height: 30px; left: 0; line-height: 30px; margin: 0; padding: 0 10px; position: absolute; right: 0; text-shadow: 1px 1px 0 #438DA8; top: 0; }

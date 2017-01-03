@@ -11,6 +11,7 @@ class ViewConversation extends React.Component
 
     return (
       <div id="conversation">
+        <h2>Conversation</h2>
         {messages}
       </div>
     );

@@ -1,10 +1,11 @@
-import React            from 'react';
-import ViewConversation from './ViewConversation.jsx';
-import ViewUserList     from './ViewUserList.jsx';
+import React                from 'react';
+import ViewConversation     from './ViewConversation.jsx';
+import ViewUserList         from './ViewUserList.jsx';
+import FormInputSendMessage from './FormInputSendMessage.jsx';
 
 class ViewChatScreen extends React.Component
 {
-  
+
   componentDidMount()
   {
     // var this.connection = new WebSocket("ws://www.example.com/socketserver");
@@ -49,10 +50,15 @@ class ViewChatScreen extends React.Component
     return (
       <div id="chatScreen">
         <div id="mainPanel">
-          <ViewConversation/>
-          <div id="textInput">
-
-          </div>
+          <ViewConversation
+            key={1}
+            onMessageConfirm={this.props.onMessageConfirm}
+            onMessageReceive={this.props.onMessageReceive}
+          />
+          <FormInputSendMessage
+            key={2}
+            onMessageSend={this.props.onMessageSend}
+          />
         </div>
         <div id="userList">
           <ViewUserList/>

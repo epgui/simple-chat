@@ -33650,7 +33650,7 @@
 	
 	var _ViewChatScreen2 = _interopRequireDefault(_ViewChatScreen);
 	
-	var _ViewLoginScreen = __webpack_require__(/*! ./ViewLoginScreen.jsx */ 531);
+	var _ViewLoginScreen = __webpack_require__(/*! ./ViewLoginScreen.jsx */ 533);
 	
 	var _ViewLoginScreen2 = _interopRequireDefault(_ViewLoginScreen);
 	
@@ -33736,6 +33736,10 @@
 	
 	var _ViewUserList2 = _interopRequireDefault(_ViewUserList);
 	
+	var _FormInputSendMessage = __webpack_require__(/*! ./FormInputSendMessage.jsx */ 531);
+	
+	var _FormInputSendMessage2 = _interopRequireDefault(_FormInputSendMessage);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33800,8 +33804,15 @@
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'mainPanel' },
-	          _react2.default.createElement(_ViewConversation2.default, null),
-	          _react2.default.createElement('div', { id: 'textInput' })
+	          _react2.default.createElement(_ViewConversation2.default, {
+	            key: 1,
+	            onMessageConfirm: this.props.onMessageConfirm,
+	            onMessageReceive: this.props.onMessageReceive
+	          }),
+	          _react2.default.createElement(_FormInputSendMessage2.default, {
+	            key: 2,
+	            onMessageSend: this.props.onMessageSend
+	          })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -33867,6 +33878,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'conversation' },
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Conversation'
+	        ),
 	        messages
 	      );
 	    }
@@ -33977,6 +33993,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'users' },
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'User list'
+	        ),
 	        users
 	      );
 	    }
@@ -34039,9 +34060,9 @@
 
 /***/ },
 /* 531 */
-/*!************************************!*\
-  !*** ./src/js/ViewLoginScreen.jsx ***!
-  \************************************/
+/*!*****************************************!*\
+  !*** ./src/js/FormInputSendMessage.jsx ***!
+  \*****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34058,79 +34079,7 @@
 	
 	var _reactDom = __webpack_require__(/*! react-dom */ 329);
 	
-	var _FormInputUsername = __webpack_require__(/*! ./FormInputUsername.jsx */ 532);
-	
-	var _FormInputUsername2 = _interopRequireDefault(_FormInputUsername);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var ViewLoginScreen = function (_React$Component) {
-	  _inherits(ViewLoginScreen, _React$Component);
-	
-	  function ViewLoginScreen() {
-	    _classCallCheck(this, ViewLoginScreen);
-	
-	    return _possibleConstructorReturn(this, (ViewLoginScreen.__proto__ || Object.getPrototypeOf(ViewLoginScreen)).apply(this, arguments));
-	  }
-	
-	  _createClass(ViewLoginScreen, [{
-	    key: 'render',
-	    value: function render() {
-	      var submitUsername = function submitUsername() {};
-	
-	      return _react2.default.createElement(
-	        'div',
-	        { id: 'loginScreen' },
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'ChatMaster 2000'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Please enter your name.'
-	        ),
-	        _react2.default.createElement(_FormInputUsername2.default, {
-	          onLogin: this.props.onLogin
-	        })
-	      );
-	    }
-	  }]);
-	
-	  return ViewLoginScreen;
-	}(_react2.default.Component);
-	
-	exports.default = ViewLoginScreen;
-
-/***/ },
-/* 532 */
-/*!**************************************!*\
-  !*** ./src/js/FormInputUsername.jsx ***!
-  \**************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 299);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(/*! react-dom */ 329);
-	
-	var _jquery = __webpack_require__(/*! jquery */ 533);
+	var _jquery = __webpack_require__(/*! jquery */ 532);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
@@ -34143,13 +34092,13 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	// This is a "controlled component": form input is reflected in the component state.
-	var FormInputUsername = function (_React$Component) {
-	  _inherits(FormInputUsername, _React$Component);
+	var FormInputSendMessage = function (_React$Component) {
+	  _inherits(FormInputSendMessage, _React$Component);
 	
-	  function FormInputUsername(props) {
-	    _classCallCheck(this, FormInputUsername);
+	  function FormInputSendMessage(props) {
+	    _classCallCheck(this, FormInputSendMessage);
 	
-	    var _this = _possibleConstructorReturn(this, (FormInputUsername.__proto__ || Object.getPrototypeOf(FormInputUsername)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (FormInputSendMessage.__proto__ || Object.getPrototypeOf(FormInputSendMessage)).call(this, props));
 	
 	    _this.state = {
 	      value: ''
@@ -34157,10 +34106,11 @@
 	
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    _this.handleKeyPress = _this.handleKeyPress.bind(_this);
 	    return _this;
 	  }
 	
-	  _createClass(FormInputUsername, [{
+	  _createClass(FormInputSendMessage, [{
 	    key: 'handleChange',
 	    value: function handleChange(event) {
 	      this.setState({
@@ -34171,44 +34121,43 @@
 	    key: 'handleSubmit',
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
-	
-	      var username = this.state.value;
-	      var chatServerURL = "http://localhost:4567/login/" + username;
-	      console.log("Attempting to reach " + chatServerURL);
-	
-	      this.serverRequest = _jquery2.default.ajax({
-	        url: chatServerURL,
-	        dataType: 'json',
-	        cache: false,
-	        async: true,
-	        success: function (data) {
-	          this.onLogin(data);
-	        }.bind(this),
-	        error: function (xhr, status, err) {
-	          console.error(chatServerURL, status, err.toString());
-	          console.warn(xhr.responseText);
-	        }.bind(this)
-	      });
+	      // TODO: Submit!
+	    }
+	  }, {
+	    key: 'handleKeyPress',
+	    value: function handleKeyPress(event) {
+	      if (event.key === 'Enter') {
+	        event.preventDefault();
+	        this.handleSubmit(event);
+	      }
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'form',
-	        { onSubmit: this.handleSubmit },
-	        _react2.default.createElement('input', { type: 'text', value: this.state.value, onChange: this.handleChange }),
-	        _react2.default.createElement('input', { type: 'submit', value: 'Login' })
+	        { id: 'messageForm' },
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'messageBox' },
+	          _react2.default.createElement('textarea', { value: this.state.value, onChange: this.handleChange, onKeyPress: this.handleKeyPress })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'sendMessageButton', onClick: this.handleSubmit },
+	          'Send'
+	        )
 	      );
 	    }
 	  }]);
 	
-	  return FormInputUsername;
+	  return FormInputSendMessage;
 	}(_react2.default.Component);
 	
-	exports.default = FormInputUsername;
+	exports.default = FormInputSendMessage;
 
 /***/ },
-/* 533 */
+/* 532 */
 /*!**********************************!*\
   !*** ../~/jquery/dist/jquery.js ***!
   \**********************************/
@@ -44435,6 +44384,176 @@
 	return jQuery;
 	} );
 
+
+/***/ },
+/* 533 */
+/*!************************************!*\
+  !*** ./src/js/ViewLoginScreen.jsx ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 299);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 329);
+	
+	var _FormInputUsername = __webpack_require__(/*! ./FormInputUsername.jsx */ 534);
+	
+	var _FormInputUsername2 = _interopRequireDefault(_FormInputUsername);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ViewLoginScreen = function (_React$Component) {
+	  _inherits(ViewLoginScreen, _React$Component);
+	
+	  function ViewLoginScreen() {
+	    _classCallCheck(this, ViewLoginScreen);
+	
+	    return _possibleConstructorReturn(this, (ViewLoginScreen.__proto__ || Object.getPrototypeOf(ViewLoginScreen)).apply(this, arguments));
+	  }
+	
+	  _createClass(ViewLoginScreen, [{
+	    key: 'render',
+	    value: function render() {
+	      var submitUsername = function submitUsername() {};
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'loginScreen' },
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'ChatMaster 2000'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'Please enter your name.'
+	        ),
+	        _react2.default.createElement(_FormInputUsername2.default, {
+	          onLogin: this.props.onLogin
+	        })
+	      );
+	    }
+	  }]);
+	
+	  return ViewLoginScreen;
+	}(_react2.default.Component);
+	
+	exports.default = ViewLoginScreen;
+
+/***/ },
+/* 534 */
+/*!**************************************!*\
+  !*** ./src/js/FormInputUsername.jsx ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 299);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 329);
+	
+	var _jquery = __webpack_require__(/*! jquery */ 532);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// This is a "controlled component": form input is reflected in the component state.
+	var FormInputUsername = function (_React$Component) {
+	  _inherits(FormInputUsername, _React$Component);
+	
+	  function FormInputUsername(props) {
+	    _classCallCheck(this, FormInputUsername);
+	
+	    var _this = _possibleConstructorReturn(this, (FormInputUsername.__proto__ || Object.getPrototypeOf(FormInputUsername)).call(this, props));
+	
+	    _this.state = {
+	      value: ''
+	    };
+	
+	    _this.handleChange = _this.handleChange.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(FormInputUsername, [{
+	    key: 'handleChange',
+	    value: function handleChange(event) {
+	      this.setState({
+	        value: event.target.value
+	      });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(event) {
+	      event.preventDefault();
+	
+	      var username = this.state.value;
+	      var chatServerURL = "http://localhost:4567/login/" + username;
+	      console.log("Attempting to reach " + chatServerURL);
+	
+	      this.serverRequest = _jquery2.default.ajax({
+	        url: chatServerURL,
+	        dataType: 'json',
+	        cache: false,
+	        async: true,
+	        success: function (data) {
+	          this.onLogin(data);
+	        }.bind(this),
+	        error: function (xhr, status, err) {
+	          console.error(chatServerURL, status, err.toString());
+	          console.warn(xhr.responseText);
+	        }.bind(this)
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'form',
+	        { onSubmit: this.handleSubmit },
+	        _react2.default.createElement('input', { type: 'text', value: this.state.value, onChange: this.handleChange }),
+	        _react2.default.createElement('input', { type: 'submit', value: 'Login' })
+	      );
+	    }
+	  }]);
+	
+	  return FormInputUsername;
+	}(_react2.default.Component);
+	
+	exports.default = FormInputUsername;
 
 /***/ }
 /******/ ]);
