@@ -155,7 +155,7 @@ class ViewChatScreen extends React.Component
   {
 
     return (
-      <div id="chatScreen">``
+      <div id="chatScreen">
         <div id="mainPanel">
           <ViewConversation
             key={1}
