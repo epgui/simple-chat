@@ -17,6 +17,13 @@ class FormInputUsername extends React.Component
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidUpdate()
+  {
+    var usernameInputField = document.getElementById("usernameInputField");
+    usernameInputField.focus();
+    usernameInputField.addEventListener("focusout", function() { usernameInputField.focus() } );
+  }
+
   handleChange(event)
   {
     this.setState({
@@ -35,7 +42,7 @@ class FormInputUsername extends React.Component
       lastActive: now,
       connected: false
     };
-    
+
     this.props.onLogin(user);
     this.props.joinChat();
   }
@@ -44,7 +51,12 @@ class FormInputUsername extends React.Component
   {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" value={this.state.value} onChange={this.handleChange} />
+        <input
+          id={"usernameInputField"}
+          type={"text"}
+          value={this.state.value}
+          onChange={this.handleChange}
+        />
         <input type="submit" value="Login" />
       </form>
     );

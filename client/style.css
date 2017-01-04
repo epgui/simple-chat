@@ -18,14 +18,14 @@ html { background: #EFEFEF url(assets/symphony.png); font-family: 'HelveticaNeue
 #chatScreen #mainPanel #conversation #conversationMessages { bottom: 2px; left: 0; overflow-y: scroll; padding: 10px; position: absolute; right: 0; top: 32px; }
   .message { display: block; padding-top: 10px; overflow: hidden; }
   .message.running { padding-top: 2px; }
-  .message .messageAuthor { clear: both; color: #CCC; float: left; font-size: 12px; height: 20px; }
+  .message .messageAuthor { background: url(assets/userIcon.png) no-repeat left 1px; clear: both; color: #C8D1D5; float: left; font-size: 12px; height: 20px; padding-left: 20px; }
   .message .messageAuthor.hidden { display: none; }
-  .message .messageContents { background: #F1F0F0; border-radius: 15px; clear: both; display: block; float: left; max-width: 60%; padding: 6px 15px; }
+  .message .messageContents { background: #EDF1F3; border-top: 1px solid #DDE3E6; border-radius: 0 15px 15px 15px; clear: both; display: block; float: left; max-width: 60%; padding: 6px 15px; }
   .message .messageTimestamp { clear: both; display: none; float: left; }
   .message.server .messageAuthor { display: none; }
-  .message.server .messageContents { background: none; color: #BBB; float: none; font-size: 12px; font-style: italic; font-weight: bold; max-width: 100%; text-align: center; width: 100%; }
-  .message.self .messageAuthor { float: right; }
-  .message.self .messageContents { background: #098AC6; color: #FFF; float: right; }
+  .message.server .messageContents { background: none; border: 0; color: #BBB; float: none; font-size: 12px; font-style: italic; font-weight: bold; max-width: 100%; text-align: center; width: 100%; }
+  .message.self .messageAuthor { background: url(assets/userIcon.png) no-repeat right 1px; color: #C8D1D5; float: right; padding-right: 20px; }
+  .message.self .messageContents { background: #14ABEF; border-top: 1px solid #119AD8; border-radius: 15px 0 15px 15px; color: #F7FDFF; float: right; text-shadow: 1px 1px 0 #119AD8; }
 
 /* Submit message */
 #chatScreen #mainPanel #messageForm { background: #FFF; border: 1px solid #E2E2E2; border-radius: 5px; bottom: 10px; height: 100px; left: 10px; position: absolute; right: 10px; }
@@ -35,4 +35,4 @@ html { background: #EFEFEF url(assets/symphony.png); font-family: 'HelveticaNeue
 
 /* Headers */
 #chatScreen #userList h2,
-#chatScreen #mainPanel #conversation h2 { background: #65D6FF url(assets/titlebar.png); border-radius: 4px 4px 0 0; color: #FFF; display: block; font-size: 16px; font-weight: normal; height: 30px; left: 0; line-height: 30px; margin: 0; padding: 0 10px; position: absolute; right: 0; text-shadow: 1px 1px 0 #438DA8; top: 0; }
+#chatScreen #mainPanel #conversation h2 { background: #65D6FF url(assets/titlebar.png); border-radius: 4px 4px 0 0; color: #FFF; display: block; font-size: 16px; font-weight: bold; height: 30px; left: 0; line-height: 30px; margin: 0; padding: 0 10px; position: absolute; right: 0; text-shadow: -1px -1px 0px #4DB1E2; top: 0; }

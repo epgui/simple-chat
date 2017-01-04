@@ -18,6 +18,13 @@ class FormInputSendMessage extends React.Component
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
+  componentDidUpdate()
+  {
+    var textarea = document.getElementById("messageBoxTextarea");
+    textarea.focus();
+    textarea.addEventListener("focusout", function() { textarea.focus() } );
+  }
+
   handleChange(event)
   {
     this.setState({
@@ -46,7 +53,12 @@ class FormInputSendMessage extends React.Component
     return (
       <form id="messageForm">
         <div id="messageBox">
-          <textarea value={this.state.value} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
+          <textarea
+            id={"messageBoxTextarea"}
+            value={this.state.value}
+            onChange={this.handleChange}
+            onKeyPress={this.handleKeyPress}
+          />
         </div>
         <div id="sendMessageButton" onClick={this.handleSubmit}>Send</div>
       </form>

@@ -34467,6 +34467,15 @@
 	  }
 	
 	  _createClass(FormInputSendMessage, [{
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      var textarea = document.getElementById("messageBoxTextarea");
+	      textarea.focus();
+	      textarea.addEventListener("focusout", function () {
+	        textarea.focus();
+	      });
+	    }
+	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(event) {
 	      this.setState({
@@ -34497,7 +34506,12 @@
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'messageBox' },
-	          _react2.default.createElement('textarea', { value: this.state.value, onChange: this.handleChange, onKeyPress: this.handleKeyPress })
+	          _react2.default.createElement('textarea', {
+	            id: "messageBoxTextarea",
+	            value: this.state.value,
+	            onChange: this.handleChange,
+	            onKeyPress: this.handleKeyPress
+	          })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -44867,6 +44881,15 @@
 	  }
 	
 	  _createClass(FormInputUsername, [{
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      var usernameInputField = document.getElementById("usernameInputField");
+	      usernameInputField.focus();
+	      usernameInputField.addEventListener("focusout", function () {
+	        usernameInputField.focus();
+	      });
+	    }
+	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(event) {
 	      this.setState({
@@ -44895,7 +44918,12 @@
 	      return _react2.default.createElement(
 	        'form',
 	        { onSubmit: this.handleSubmit },
-	        _react2.default.createElement('input', { type: 'text', value: this.state.value, onChange: this.handleChange }),
+	        _react2.default.createElement('input', {
+	          id: "usernameInputField",
+	          type: "text",
+	          value: this.state.value,
+	          onChange: this.handleChange
+	        }),
 	        _react2.default.createElement('input', { type: 'submit', value: 'Login' })
 	      );
 	    }

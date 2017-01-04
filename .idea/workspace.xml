@@ -4,15 +4,7 @@
     <list default="true" id="14c72f65-9bb1-4a4e-bda5-4125c5f27102" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/bundle.js" afterPath="$PROJECT_DIR$/client/bundle.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/bundle.js.map" afterPath="$PROJECT_DIR$/client/bundle.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/ContainerApplication.jsx" afterPath="$PROJECT_DIR$/client/src/js/ContainerApplication.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/FormInputUsername.jsx" afterPath="$PROJECT_DIR$/client/src/js/FormInputUsername.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/StateMachine.js" afterPath="$PROJECT_DIR$/client/src/js/StateMachine.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/StateMachineComponents.js" afterPath="$PROJECT_DIR$/client/src/js/StateMachineComponents.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/StateMachineDefinitions.js" afterPath="$PROJECT_DIR$/client/src/js/StateMachineDefinitions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/ViewApplication.jsx" afterPath="$PROJECT_DIR$/client/src/js/ViewApplication.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/ViewChatScreen.jsx" afterPath="$PROJECT_DIR$/client/src/js/ViewChatScreen.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/ViewLoginScreen.jsx" afterPath="$PROJECT_DIR$/client/src/js/ViewLoginScreen.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ChatWebSocketHandler.java" afterPath="$PROJECT_DIR$/src/main/java/ChatWebSocketHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/js/FormInputSendMessage.jsx" afterPath="$PROJECT_DIR$/client/src/js/FormInputSendMessage.jsx" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -675,7 +667,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
