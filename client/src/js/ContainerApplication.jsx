@@ -3,12 +3,14 @@ import { render }      from 'react-dom';
 import { connect }     from 'react-redux';
 import ViewApplication from './ViewApplication.jsx';
 import {
+  joinChat,
   assignUserID,
   receiveMessage,
   sendMessage,
   confirmReception,
   addUserToList,
-  updateUsername
+  updateUsername,
+  disconnectUser
 } from './StateMachineDefinitions.js';
 
 // This generates ContainerApplication, which passes the store's state onto Application, its child component.
@@ -30,6 +32,9 @@ const mapStateToProps = function(state)
 
 const mapDispatchToProps = function(dispatch) {
   return {
+    connectToChat: () => {
+      dispatch(joinChat());
+    },
     assignID: (user) => {
       dispatch(assignUserID(user));
     },
@@ -51,8 +56,8 @@ const mapDispatchToProps = function(dispatch) {
     onActivity: (user) => {
       dispatch(updateLastActive(user));
     },
-    disconnectUser: (id) => {
-      dispatch(disconnectUserID(id));
+    disconnectUser: (user) => {
+      dispatch(disconnectUser(user));
     }
   }
 }

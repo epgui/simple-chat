@@ -15,7 +15,7 @@ html { background: #EFEFEF url(assets/symphony.png); font-family: 'HelveticaNeue
 /* Read messages */
 #chatScreen #mainPanel { bottom: 0; left: 0; position: absolute; right: 200px; top: 0; }
 #chatScreen #mainPanel #conversation { background: #FFF; border: 1px solid #E2E2E2; border-radius: 5px; bottom: 120px; left: 10px; position: absolute; right: 10px; top: 10px; }
-#chatScreen #mainPanel #conversation #conversationMessages { bottom: 0; left: 10px; position: absolute; right: 10px; top: 40px; }
+#chatScreen #mainPanel #conversation #conversationMessages { bottom: 2px; left: 0; overflow-y: scroll; padding: 10px; position: absolute; right: 0; top: 32px; }
   .message { display: block; padding-top: 10px; overflow: hidden; }
   .message.running { padding-top: 2px; }
   .message .messageAuthor { clear: both; color: #CCC; float: left; font-size: 12px; height: 20px; }

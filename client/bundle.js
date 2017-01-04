@@ -33376,10 +33376,10 @@
 	// Import state definitions
 	var initialState = exports.initialState = {
 	  error: false,
-	  view: _StateMachineDefinitions.VIEW_STATE.SPEAK_SCREEN,
+	  view: _StateMachineDefinitions.VIEW_STATE.LOGIN_SCREEN,
 	  user: {
 	    id: null,
-	    username: "John Doe",
+	    username: null,
 	    lastActive: now,
 	    connected: false
 	  },
@@ -33434,6 +33434,8 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
+	    case _StateMachineDefinitions.JOIN_CHAT:
+	      return _StateMachineDefinitions.VIEW_STATE.SPEAK_SCREEN;
 	    default:
 	      return state;
 	  }
@@ -33587,13 +33589,14 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.joinChat = joinChat;
 	exports.assignUserID = assignUserID;
 	exports.receiveMessage = receiveMessage;
 	exports.sendMessage = sendMessage;
 	exports.confirmReception = confirmReception;
 	exports.addUserToList = addUserToList;
 	exports.updateUsername = updateUsername;
-	exports.disconnectUserID = disconnectUserID;
+	exports.disconnectUser = disconnectUser;
 	exports.updateLastActive = updateLastActive;
 	// Define all possible view states
 	var VIEW_STATE = exports.VIEW_STATE = {
@@ -33602,6 +33605,7 @@
 	};
 	
 	// Define all possible action types
+	var JOIN_CHAT = exports.JOIN_CHAT = "join-chat";
 	var ASSIGN_USER_ID = exports.ASSIGN_USER_ID = "assign-user-id";
 	var RECEIVE_MESSAGE = exports.RECEIVE_MESSAGE = "receive-message";
 	var SEND_MESSAGE = exports.SEND_MESSAGE = "send-message";
@@ -33612,6 +33616,12 @@
 	var UPDATE_LAST_ACTIVE = exports.UPDATE_LAST_ACTIVE = "update-last-active";
 	
 	// Define action
+	function joinChat() {
+	  return {
+	    type: JOIN_CHAT
+	  };
+	}
+	
 	function assignUserID(user) {
 	  return {
 	    type: ASSIGN_USER_ID,
@@ -33654,10 +33664,10 @@
 	  };
 	}
 	
-	function disconnectUserID(id) {
+	function disconnectUser(user) {
 	  return {
 	    type: DISCONNECT_USER,
-	    id: id
+	    user: user
 	  };
 	}
 	
@@ -33715,6 +33725,9 @@
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
+	    connectToChat: function connectToChat() {
+	      dispatch((0, _StateMachineDefinitions.joinChat)());
+	    },
 	    assignID: function assignID(user) {
 	      dispatch((0, _StateMachineDefinitions.assignUserID)(user));
 	    },
@@ -33736,8 +33749,8 @@
 	    onActivity: function onActivity(user) {
 	      dispatch(updateLastActive(user));
 	    },
-	    disconnectUser: function disconnectUser(id) {
-	      dispatch(disconnectUserID(id));
+	    disconnectUser: function disconnectUser(user) {
+	      dispatch((0, _StateMachineDefinitions.disconnectUser)(user));
 	    }
 	  };
 	};
@@ -33820,7 +33833,8 @@
 	          views.push(_react2.default.createElement(_ViewLoginScreen2.default, {
 	            key: 1,
 	            error: this.props.error,
-	            onLogin: this.props.login
+	            onLogin: this.props.onUsernameChange,
+	            onJoinChat: this.props.connectToChat
 	          }));
 	      }
 	
@@ -33876,6 +33890,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var HANDSHAKE = "login-handshake";
+	
 	var ViewChatScreen = function (_React$Component) {
 	  _inherits(ViewChatScreen, _React$Component);
 	
@@ -33892,6 +33908,9 @@
 	      this.connection.onmessage = this.receiveMessage.bind(this);
 	      this.connection.onerror = this.catchConnectionError;
 	      this.connection.onclose = this.closeConnection;
+	      this.connection.onopen = function (event) {
+	        this.sendMessage(HANDSHAKE);
+	      }.bind(this);
 	    }
 	  }, {
 	    key: 'receiveMessage',
@@ -33899,12 +33918,18 @@
 	
 	      var data = JSON.parse(websocketCommunication.data);
 	
+	      console.log("data:");
+	      console.log(data);
+	
 	      var message = {
 	        "id": data.message.id,
 	        "author": data.message.author,
 	        "contents": data.message.contents,
 	        "timestamp": data.message.timestamp
 	      };
+	
+	      console.log("message:");
+	      console.log(message);
 	
 	      this.updateUserList(data.userList);
 	
@@ -33927,6 +33952,16 @@
 	        var matched = false;
 	
 	        for (var j = 0, jLength = this.props.userList.length; j < jLength; j++) {
+	          console.log({
+	            "server": {
+	              "id": userList[i].id,
+	              "username": userList[i].username
+	            },
+	            "state": {
+	              "id": this.props.userList[j].id,
+	              "username": this.props.userList[j].username
+	            }
+	          });
 	          if (userList[i].id == this.props.userList[j].id) {
 	            if (userList[i].username != this.props.userList[j].username) {
 	              this.props.onUsernameChange(userList[i]);
@@ -33960,20 +33995,21 @@
 	
 	          if (unmatchedUsers.length > 0) {
 	            // TODO: TEST THIS!!!
-	            this.props.onUserDisconnect(unmatchedUsers[0].id);
+	            this.props.onUserDisconnect(unmatchedUsers[0]);
 	          }
 	        }
 	    }
 	  }, {
 	    key: 'sendMessage',
 	    value: function sendMessage(message) {
+	
 	      if (message !== "") {
 	        // Get UNIX timestamp
 	        var timestamp = Math.round(new Date().getTime() / 1000);
 	
 	        // Build a standard json message
 	        var json = {
-	          "id": 1,
+	          "id": 0,
 	          "contents": message,
 	          "author": this.props.user.username,
 	          "timestamp": timestamp
@@ -33998,9 +34034,11 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'chatScreen' },
+	        '``',
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'mainPanel' },
@@ -34080,6 +34118,21 @@
 	  }
 	
 	  _createClass(ViewConversation, [{
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate() {
+	      var node = this.refs.conversationMessages;
+	      var scrollPosition = node.scrollTop + node.offsetHeight;
+	      this.shouldScrollToBottom = scrollPosition === node.scrollHeight;
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      if (this.shouldScrollToBottom) {
+	        var node = this.refs.conversationMessages;
+	        node.scrollTop = node.scrollHeight;
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var user = this.props.user;
@@ -34136,7 +34189,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { id: 'conversationMessages' },
+	          { id: 'conversationMessages', ref: 'conversationMessages' },
 	          messagesToRender
 	        )
 	      );
@@ -44750,7 +44803,8 @@
 	          'Please enter your name.'
 	        ),
 	        _react2.default.createElement(_FormInputUsername2.default, {
-	          onLogin: this.props.onLogin
+	          onLogin: this.props.onLogin,
+	          joinChat: this.props.onJoinChat
 	        })
 	      );
 	    }
@@ -44824,23 +44878,16 @@
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
 	
-	      var username = this.state.value;
-	      var chatServerURL = "http://localhost:4567/login/" + username;
-	      console.log("Attempting to reach " + chatServerURL);
+	      var now = new Date() / 1000;
+	      var user = {
+	        id: null,
+	        username: this.state.value,
+	        lastActive: now,
+	        connected: false
+	      };
 	
-	      this.serverRequest = _jquery2.default.ajax({
-	        url: chatServerURL,
-	        dataType: 'json',
-	        cache: false,
-	        async: true,
-	        success: function (data) {
-	          this.onLogin(data);
-	        }.bind(this),
-	        error: function (xhr, status, err) {
-	          console.error(chatServerURL, status, err.toString());
-	          console.warn(xhr.responseText);
-	        }.bind(this)
-	      });
+	      this.props.onLogin(user);
+	      this.props.joinChat();
 	    }
 	  }, {
 	    key: 'render',

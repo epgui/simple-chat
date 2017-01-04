@@ -16,6 +16,7 @@ class ViewLoginScreen extends React.Component
         <p>Please enter your name.</p>
         <FormInputUsername
           onLogin={this.props.onLogin}
+          joinChat={this.props.onJoinChat}
         />
       </div>
     );

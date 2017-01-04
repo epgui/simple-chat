@@ -4,6 +4,21 @@ import ViewMessage from './ViewMessage.jsx';
 
 class ViewConversation extends React.Component
 {
+  componentWillUpdate()
+  {
+    var node = this.refs.conversationMessages;
+    var scrollPosition = node.scrollTop + node.offsetHeight;
+    this.shouldScrollToBottom = (scrollPosition === node.scrollHeight);
+  }
+
+  componentDidUpdate()
+  {
+    if (this.shouldScrollToBottom)
+    {
+      var node = this.refs.conversationMessages;
+      node.scrollTop = node.scrollHeight;
+    }
+  }
 
   render()
   {
@@ -47,7 +62,7 @@ class ViewConversation extends React.Component
     return (
       <div id="conversation">
         <h2>Conversation</h2>
-        <div id="conversationMessages">
+        <div id="conversationMessages" ref="conversationMessages">
           {messagesToRender}
         </div>
       </div>

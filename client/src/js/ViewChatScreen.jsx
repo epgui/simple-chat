@@ -3,6 +3,8 @@ import ViewConversation     from './ViewConversation.jsx';
 import ViewUserList         from './ViewUserList.jsx';
 import FormInputSendMessage from './FormInputSendMessage.jsx';
 
+const HANDSHAKE = "login-handshake";
+
 class ViewChatScreen extends React.Component
 {
 
@@ -12,6 +14,9 @@ class ViewChatScreen extends React.Component
     this.connection.onmessage = this.receiveMessage.bind(this);
     this.connection.onerror = this.catchConnectionError;
     this.connection.onclose = this.closeConnection;
+    this.connection.onopen = function(event) {
+      this.sendMessage(HANDSHAKE);
+    }.bind(this);
   }
 
   receiveMessage(websocketCommunication)
@@ -19,12 +24,18 @@ class ViewChatScreen extends React.Component
 
     var data = JSON.parse(websocketCommunication.data);
 
+    console.log("data:");
+    console.log(data);
+
     var message = {
       "id":        data.message.id,
       "author":    data.message.author,
       "contents":  data.message.contents,
       "timestamp": data.message.timestamp
     };
+
+    console.log("message:");
+    console.log(message);
 
     this.updateUserList(data.userList);
 
@@ -48,6 +59,16 @@ class ViewChatScreen extends React.Component
 
       for (var j = 0, jLength = this.props.userList.length; j < jLength; j++)
       {
+        console.log({
+          "server": {
+            "id": userList[i].id,
+            "username": userList[i].username
+          },
+          "state": {
+            "id": this.props.userList[j].id,
+            "username": this.props.userList[j].username
+          }
+        });
         if (userList[i].id == this.props.userList[j].id)
         {
           if (userList[i].username != this.props.userList[j].username)
@@ -91,7 +112,7 @@ class ViewChatScreen extends React.Component
       if (unmatchedUsers.length > 0)
       {
         // TODO: TEST THIS!!!
-        this.props.onUserDisconnect(unmatchedUsers[0].id);
+        this.props.onUserDisconnect(unmatchedUsers[0]);
       }
     }
 
@@ -99,6 +120,7 @@ class ViewChatScreen extends React.Component
 
   sendMessage(message)
   {
+
     if (message !== "")
     {
       // Get UNIX timestamp
@@ -106,11 +128,11 @@ class ViewChatScreen extends React.Component
 
       // Build a standard json message
       var json = {
-        "id": 1,
+        "id": 0,
         "contents": message,
         "author": this.props.user.username,
         "timestamp": timestamp
-      }
+      };
 
       this.connection.send(JSON.stringify(json));
 
@@ -131,8 +153,9 @@ class ViewChatScreen extends React.Component
 
   render()
   {
+
     return (
-      <div id="chatScreen">
+      <div id="chatScreen">``
         <div id="mainPanel">
           <ViewConversation
             key={1}

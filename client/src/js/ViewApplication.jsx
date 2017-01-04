@@ -36,7 +36,8 @@ class ViewApplication extends React.Component
           <ViewLoginScreen
             key={1}
             error={this.props.error}
-            onLogin={this.props.login}
+            onLogin={this.props.onUsernameChange}
+            onJoinChat={this.props.connectToChat}
           />
         );
     }

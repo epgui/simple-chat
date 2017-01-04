@@ -9,10 +9,10 @@ var now = new Date();
 // Initialize application state
 export const initialState = {
   error: false,
-  view: VIEW_STATE.SPEAK_SCREEN,
+  view: VIEW_STATE.LOGIN_SCREEN,
   user: {
     id: null,
-    username: "John Doe",
+    username: null,
     lastActive: now,
     connected: false
   },

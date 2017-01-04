@@ -5,6 +5,7 @@ export const VIEW_STATE = {
 };
 
 // Define all possible action types
+export const JOIN_CHAT          = "join-chat";
 export const ASSIGN_USER_ID     = "assign-user-id";
 export const RECEIVE_MESSAGE    = "receive-message";
 export const SEND_MESSAGE       = "send-message";
@@ -15,6 +16,12 @@ export const UPDATE_USERNAME    = "update-username";
 export const UPDATE_LAST_ACTIVE = "update-last-active";
 
 // Define action
+export function joinChat() {
+  return {
+    type: JOIN_CHAT
+  };
+}
+
 export function assignUserID(user) {
   return {
     type: ASSIGN_USER_ID,
@@ -57,10 +64,10 @@ export function updateUsername(user) {
   }
 }
 
-export function disconnectUserID(id) {
+export function disconnectUser(user) {
   return {
     type: DISCONNECT_USER,
-    id
+    user
   }
 }
 

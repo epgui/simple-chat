@@ -26,15 +26,15 @@ public class ChatWebSocketHandler {
       Chat.idUserMap.put(userID, user);
 
       // Build a server message
-      Message message = new Message();
-      message.setAuthor(Chat.server.getUsername());
-      message.setContents(user.getUsername() + " joined the chat.");
-      String jsonMessage = Chat.convertObjectToJSON(message);
+      // Message message = new Message();
+      // message.setAuthor(Chat.server.getUsername());
+      // message.setContents(user.getUsername() + " joined the chat.");
+      // String jsonMessage = Chat.convertObjectToJSON(message);
 
-      System.out.println("onConnect built the following json message:\n");
-      System.out.println(jsonMessage + "\n");
+      // System.out.println("onConnect built the following json message:\n");
+      // System.out.println(jsonMessage + "\n");
 
-      Chat.broadcastMessage(Chat.server, jsonMessage);
+      // Chat.broadcastMessage(Chat.server, jsonMessage);
 
    }
 
@@ -68,19 +68,28 @@ public class ChatWebSocketHandler {
 
       User sender = Chat.sessionUserMap.get(user);
 
-      if ( ! Objects.equals(sender.getUsername(), message.getAuthor()) )
-      {
+      if ( ! Objects.equals(sender.getUsername(), message.getAuthor()) ) {
+
          // Build a server message to notify everyone of the username change
          Message deltaMessage = new Message();
          deltaMessage.setAuthor(Chat.server.getUsername());
-         deltaMessage.setContents(sender.getUsername() + " is now called " + message.getAuthor() + ".");
+
+         if ( Objects.equals(message.getContents(), "login-handshake") ) {
+            deltaMessage.setContents(message.getAuthor() + " joined the chat.");
+         }
+         else {
+            deltaMessage.setContents(sender.getUsername() + " is now called " + message.getAuthor() + ".");
+         }
+
+         sender.setUsername(message.getAuthor());
+
          String jsonDeltaMessage = Chat.convertObjectToJSON(deltaMessage);
          Chat.broadcastMessage(Chat.server, jsonDeltaMessage);
 
-         sender.setUsername(message.getAuthor());
       }
-
-      Chat.broadcastMessage(sender, jsonMessage);
+      else {
+         Chat.broadcastMessage(sender, jsonMessage);
+      }
 
    }
 

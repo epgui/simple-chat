@@ -28,24 +28,16 @@ class FormInputUsername extends React.Component
   {
     event.preventDefault();
 
-    var username = this.state.value;
-    var chatServerURL = "http://localhost:4567/login/" + username;
-    console.log("Attempting to reach " + chatServerURL);
-
-    this.serverRequest = $.ajax(
-    {
-      url: chatServerURL,
-      dataType: 'json',
-      cache: false,
-      async: true,
-      success: function(data) {
-        this.onLogin(data);
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(chatServerURL, status, err.toString());
-        console.warn(xhr.responseText);
-      }.bind(this)
-    });
+    var now = new Date() / 1000;
+    var user = {
+      id: null,
+      username: this.state.value,
+      lastActive: now,
+      connected: false
+    };
+    
+    this.props.onLogin(user);
+    this.props.joinChat();
   }
 
   render()

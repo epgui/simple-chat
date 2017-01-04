@@ -1,5 +1,6 @@
 // Import state machine actions
 import {
+  JOIN_CHAT,
   ASSIGN_USER_ID,
   RECEIVE_MESSAGE,
   SEND_MESSAGE,
@@ -17,6 +18,8 @@ export function ViewStateMachine(state = VIEW_STATE.LOGIN_SCREEN, action)
 {
   switch (action.type)
   {
+    case JOIN_CHAT:
+      return VIEW_STATE.SPEAK_SCREEN;
     default:
       return state;
   }
